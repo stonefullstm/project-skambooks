@@ -19,11 +19,11 @@ module.exports = {
         type: Sequelize.STRING(255),
       },
       numero: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       complemento: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING(255),
       },
       cep: {
@@ -35,6 +35,10 @@ module.exports = {
         type: Sequelize.STRING(255),
       },
       cidade: {
+        allowNull: false,
+        type: Sequelize.STRING(255),
+      },
+      estado: {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
