@@ -1,5 +1,5 @@
 # Project Skamkbooks
-Uma aplicação completa (*back end* e *front end*) para troca de livros entre leitores. 
+Uma aplicação full stack para troca de livros entre leitores. 
  
 ## Instalação/Execução 
  
