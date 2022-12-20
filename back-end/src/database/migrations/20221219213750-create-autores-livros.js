@@ -13,14 +13,14 @@ module.exports = {
         },
         field: 'id_livro',
       },
-      idLeitor: {
+      idAutor: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'leitores',
+          model: 'autores',
           key: 'id',
         },
-        field: 'id_leitor',
+        field: 'id_autor',
       },
     });
   },
