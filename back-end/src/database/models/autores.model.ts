@@ -1,4 +1,4 @@
-import { Model, INTEGER, STRING } from 'sequelize';
+import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
 class Autor extends Model {
@@ -25,10 +25,5 @@ Autor.init({
   modelName: 'autores',
   timestamps: false,
 });
-
-/**
-  * `Workaround` para aplicar as associations em TS:
-  * Associations 1:N devem ficar em uma das instâncias de modelo
-  * */
 
 export default Autor;
