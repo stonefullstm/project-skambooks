@@ -3,9 +3,9 @@ import Livro from './models/livros.model';
 
 (async () => {
  
-  const livros = await Autor.findOne({
+  const livros = await Livro.findOne({
     where: { id: 1 },
-    include: [{ model: Livro, as: 'livros', through: { attributes: [] } }],
+    include: { model: Autor, as: 'autores' },
   });
   console.log(livros);
 
