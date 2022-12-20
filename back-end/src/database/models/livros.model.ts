@@ -11,6 +11,7 @@ class Livro extends Model {
   declare ano: string;
   declare paginas: number;
   declare idLeitor: number;
+  declare autores?: Autor[];
 }
 
 Livro.init({
@@ -53,9 +54,9 @@ Livro.init({
 Leitor.hasMany(Livro, { foreignKey: 'idLeitor', as: 'livros' });
 Livro.belongsTo(Leitor, { foreignKey: 'idLeitor', as: 'livros' });
 Autor.belongsToMany(Livro, { foreignKey: 'idAutor', as: 'livros',
- through: {model: AutoresLivros}, otherKey: 'idLivro' });
+ through: AutoresLivros, otherKey: 'idLivro' });
 
 Livro.belongsToMany(Autor, { foreignKey: 'idLivro', as: 'autores',
- through: {model: AutoresLivros}, otherKey: 'idAutor' });
+ through: AutoresLivros, otherKey: 'idAutor' });
  
 export default Livro;
