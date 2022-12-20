@@ -1,14 +1,13 @@
-import Autor from '../database/models/autores.model';
-import Leitor from './models/leitores.model';
+import Autor from './models/autores.model';
 import Livro from './models/livros.model';
 
 (async () => {
-  /* const books = await Autor.findAll({ raw: true });
-  console.table(books); */
-  const livros = await Livro.findAll({ raw: true, include: ['autores_livros'] });
-  console.table(livros);
+ 
+  const livros = await Autor.findOne({
+    where: { id: 1 },
+    include: [{ model: Livro, as: 'livros', through: { attributes: [] } }],
+  });
+  console.log(livros);
 
-  const booksWithComments = await Leitor.findAll({ raw: true, include: ['livros'] });
-  console.table(booksWithComments);
   process.exit(0);
 })();

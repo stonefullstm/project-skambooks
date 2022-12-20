@@ -1,6 +1,5 @@
 import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
-import Livro from './livros.model';
 
 class Autor extends Model {
   declare id: number;
@@ -26,7 +25,9 @@ Autor.init({
   modelName: 'autores',
   timestamps: false,
 });
-Autor.belongsToMany(Livro, { foreignKey: 'idAutor', as: 'autores_livros',
- through: 'AutoresLivros', otherKey: 'idLivro' });
+// Autor.belongsToMany(Livro, { foreignKey: 'idAutor', as: 'livros',
+//  through: {model: AutoresLivros}, otherKey: 'idLivro' });
 
+// Livro.belongsToMany(Autor, { foreignKey: 'idLivro', as: 'autores',
+//  through: {model: AutoresLivros}, otherKey: 'idAutor' });
 export default Autor;
