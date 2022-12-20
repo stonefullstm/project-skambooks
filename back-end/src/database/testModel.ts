@@ -3,9 +3,9 @@ import Leitor from './models/leitores.model';
 import Livro from './models/livros.model';
 
 (async () => {
-  const books = await Autor.findAll({ raw: true });
-  console.table(books);
-  const livros = await Livro.findAll({ raw: true });
+  /* const books = await Autor.findAll({ raw: true });
+  console.table(books); */
+  const livros = await Livro.findAll({ raw: true, include: ['autores_livros'] });
   console.table(livros);
 
   const booksWithComments = await Leitor.findAll({ raw: true, include: ['livros'] });

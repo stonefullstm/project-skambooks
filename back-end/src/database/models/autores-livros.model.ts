@@ -1,32 +1,39 @@
 import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
+import Autor from './autores.model';
 import Livro from './livros.model';
 
-class Autor extends Model {
-  declare id: number;
-  declare nome: string;
+class AutoresLivros extends Model {
+  declare idLivro: number;
+  declare idAutor: number;
 }
 
-Autor.init({
-  id: {
+AutoresLivros.init({
+  idLivro: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  nome: {
-    type: STRING(255),
+  idAutor: {
+    type: INTEGER,
     allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
   },
 }, 
 {
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'autores',
+  modelName: 'autores_livros',
   timestamps: false,
 });
+
 Autor.belongsToMany(Livro, { foreignKey: 'idAutor', as: 'autores_livros',
  through: 'AutoresLivros', otherKey: 'idLivro' });
 
-export default Autor;
+Livro.belongsToMany(Autor, { foreignKey: 'idLivro', as: 'autores_livros',
+ through: 'AutoresLivros', otherKey: 'idAutor' });
+
+export default AutoresLivros;
