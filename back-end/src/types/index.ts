@@ -12,4 +12,10 @@ export type TLivro = {
 export type TAutor = {
   id: number;
   nome: string;
+};
+
+export type TUsuario = {
+  id: number;
+  email: string;
+  senha: string;
 } 
