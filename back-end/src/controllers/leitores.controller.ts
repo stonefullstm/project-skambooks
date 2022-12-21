@@ -11,4 +11,13 @@ const getIdLeitor = async ( req: Request, res: Response) => {
   return res.status(statusCodes.NOT_FOUND).json({ message: 'Leitor not found'});
 };
 
-export default { getIdLeitor };
+const insertLeitor = async ( req: Request, res: Response) => {
+  console.log(req.body);
+  
+  const result = await leitores.insertLeitor(req.body);
+  if (result) {
+    return res.status(statusCodes.CREATED).json(req.body);
+  }
+  return res.status(statusCodes.ERROR).json({ message: 'Error'});
+};
+export default { getIdLeitor, insertLeitor };
