@@ -5,7 +5,7 @@ import statusCodes from '../statusCodes';
 const getIdLeitor = async ( req: Request, res: Response) => {
   const { id } = req.params;
   const result = await leitores.getIdLeitor(Number(id));
-  if (result) res.status(statusCodes.OK).json({result});
+  if (result) res.status(statusCodes.OK).json(result);
   res.status(statusCodes.NOT_FOUND).json({ message: 'Leitor not found'});
 };
 
