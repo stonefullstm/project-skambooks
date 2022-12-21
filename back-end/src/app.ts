@@ -1,9 +1,9 @@
 import express from 'express';
-import livrosController from './controllers/livros.controller';
+import routerLivros from './routes/livros.routes';
 
 const app = express();
 
 app.use(express.json());
-app.get('/livros', livrosController.getAll);
+app.use(routerLivros);
 
 export default app;
