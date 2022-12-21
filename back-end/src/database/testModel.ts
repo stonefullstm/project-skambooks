@@ -1,6 +1,5 @@
 import Autor from './models/autores.model';
 import Livro from './models/livros.model';
-import Leitor from './models/leitores.model';
 import Trocas from './models/trocas.model';
 
 (async () => {
@@ -9,9 +8,9 @@ import Trocas from './models/trocas.model';
     where: { id: 1 },
     include: { model: Autor, as: 'autores' },
   });
-  console.log(livros);
+  console.table(livros);
   const leitores = await Trocas.findAll({
-    include: ['destinatario'],
+    raw: true, include: ['destinatario'],
   });
   console.table(leitores);
 
