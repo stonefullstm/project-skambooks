@@ -34,4 +34,13 @@ const getLeitorByEmail = async (req: Request, res: Response) => {
   res.status(statusCodes.OK).json({ token });
 };
 
-export default { getIdLeitor, getLeitorByEmail };
+const insertLeitor = async ( req: Request, res: Response) => {
+  console.log(req.body);
+  
+  const result = await leitores.insertLeitor(req.body);
+  if (result) {
+    return res.status(statusCodes.CREATED).json(req.body);
+  }
+  return res.status(statusCodes.ERROR).json({ message: 'Error'});
+};
+export default { getIdLeitor, insertLeitor, getLeitorByEmail };
