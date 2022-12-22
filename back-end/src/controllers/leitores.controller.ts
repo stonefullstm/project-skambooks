@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import leitores from '../services/leitores.service';
 import statusCodes from '../statusCodes';
@@ -18,7 +19,8 @@ const getIdLeitor = async ( req: Request, res: Response) => {
 const getLeitorByEmail = async (req: Request, res: Response) => {
   const { email, senha } = req.body;
   const user = await leitores.getLeitorByEmail(email);
-  if (!user || user.senha !== senha) {
+  
+  if (!user || !bcrypt.compareSync(senha, user.senha) ) {
     return res.status(statusCodes.NOT_FOUND).json({message: 'Usuário not found'});
   };
   const userData = { 
