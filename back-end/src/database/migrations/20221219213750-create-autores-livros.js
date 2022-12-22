@@ -11,6 +11,7 @@ module.exports = {
           model: 'livros',
           key: 'id',
         },
+        onDelete: 'CASCADE',
         field: 'id_livro',
       },
       idAutor: {
