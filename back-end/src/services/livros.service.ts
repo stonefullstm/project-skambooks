@@ -19,7 +19,7 @@ const getIdLivro = async (id: number): Promise<TLivro[]> => {
 
 const deleteLivro = async (id: number): Promise<TLivro[]> => {
   const leitor = await Livro.destroy({
-    where: { id }
+    where: { id },
   });
   return leitor as unknown as TLivro[];
 };
