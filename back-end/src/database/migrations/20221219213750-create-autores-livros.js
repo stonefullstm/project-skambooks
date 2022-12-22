@@ -21,6 +21,7 @@ module.exports = {
           model: 'autores',
           key: 'id',
         },
+        onDelete: 'CASCADE',
         field: 'id_autor',
       },
     });
