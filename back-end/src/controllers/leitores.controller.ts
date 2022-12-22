@@ -57,4 +57,18 @@ const updateLeitor = async ( req: Request, res: Response) => {
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
 };
 
-export default { getIdLeitor, insertLeitor, getLeitorByEmail, updateLeitor };
+const deleteLeitor = async ( req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await leitores.getIdLeitor(Number(id));
+  if (!result) {
+    return res.status(statusCodes.NOT_FOUND).json({ message: 'Leitor not found'});
+  }
+  const leitor = await leitores.deleteLeitor(Number(id));
+  if (leitor) {
+    return res.status(statusCodes.OK).json({ message: `Delete leitor: ${id}`});
+  };
+  return res.status(statusCodes.ERROR).json({ message: 'Error'});
+  
+};
+
+export default { getIdLeitor, insertLeitor, getLeitorByEmail, updateLeitor, deleteLeitor };
