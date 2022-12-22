@@ -30,4 +30,12 @@ const updateLeitor = async (body: Tleitores, id: number): Promise<Tleitores[]> =
     });
   return result as unknown as Tleitores[];
 };
-export default { getIdLeitor, insertLeitor, getLeitorByEmail, updateLeitor };
+
+const deleteLeitor = async (id: number): Promise<Tleitores[]> => {
+  const leitor = await leitores.destroy({
+    where: { id }
+  });
+  return leitor as unknown as Tleitores[];
+};
+
+export default { getIdLeitor, insertLeitor, getLeitorByEmail, updateLeitor, deleteLeitor };
