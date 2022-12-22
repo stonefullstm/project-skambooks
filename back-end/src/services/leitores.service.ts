@@ -21,4 +21,13 @@ const insertLeitor = async (body: Tleitores): Promise<Tleitores[]> => {
   return result as unknown as Tleitores[];
 };
 
-export default { getIdLeitor, insertLeitor, getLeitorByEmail };
+const updateLeitor = async (body: Tleitores, id: number): Promise<Tleitores[]> => {
+  const { nome, endereco, numero, complemento, cep, bairro, cidade, estado, telefone, email, senha, creditos } = body;
+  const result = await leitores.update({nome, endereco, numero, 
+    complemento, cep, bairro, cidade, estado, telefone, email, senha, creditos},
+    {
+      where: { id },
+    });
+  return result as unknown as Tleitores[];
+};
+export default { getIdLeitor, insertLeitor, getLeitorByEmail, updateLeitor };
