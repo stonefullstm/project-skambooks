@@ -53,7 +53,7 @@ module.exports = {
       },
       senha: {
         allowNull: false,
-        type: Sequelize.STRING(40),
+        type: Sequelize.STRING(255),
       },
       creditos: {
         allowNull: false,
