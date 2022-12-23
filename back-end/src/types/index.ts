@@ -1,6 +1,6 @@
 
 export type TLivro = {
-  id: number;
+  id?: number;
   isbn: string;
   titulo: string;
   ano: string;
@@ -10,7 +10,7 @@ export type TLivro = {
 };
 
 export type TAutor = {
-  id: number;
+  id?: number;
   nome: string;
 };
 
@@ -18,4 +18,9 @@ export type TUsuario = {
   id: number;
   email: string;
   senha: string;
-} 
+};
+
+export type Tautores = {
+  idLivro: number,
+  idAutor: number,
+};

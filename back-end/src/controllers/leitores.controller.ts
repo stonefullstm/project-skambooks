@@ -40,6 +40,8 @@ const insertLeitor = async ( req: Request, res: Response) => {
   console.log(req.body);
   
   const result = await leitores.insertLeitor(req.body);
+  console.log(result);
+  
   if (result) {
     return res.status(statusCodes.CREATED).json(req.body);
   }
