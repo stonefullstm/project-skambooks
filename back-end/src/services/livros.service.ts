@@ -39,14 +39,15 @@ const createLivro = async (body: TLivro): Promise<TLivro[]> => {
 };
 
 const createAutor = async (body: TAutor): Promise<TAutor[]> => {
-  const {  nome } = body;
+  
   const autor = await Autor.create({
-     nome,
+     nome: body,
   });
   return autor as unknown as TAutor[];
 };
 
 const createAutorLivro = async (idLivro: number, idAutor: number): Promise<Tautores[]> => {
+  
   const autores = await AutoresLivros.create({
     idLivro, idAutor,
   });
