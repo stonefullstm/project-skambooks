@@ -1,19 +1,19 @@
 import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
-class Autor extends Model {
+class Author extends Model {
   declare id: number;
   declare nome: string;
 }
 
-Autor.init({
+Author.init({
   id: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  nome: {
+  name: {
     type: STRING(255),
     allowNull: false,
   },
@@ -22,12 +22,8 @@ Autor.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'autores',
+  modelName: 'authors',
   timestamps: false,
 });
-// Autor.belongsToMany(Livro, { foreignKey: 'idAutor', as: 'livros',
-//  through: {model: AutoresLivros}, otherKey: 'idLivro' });
 
-// Livro.belongsToMany(Autor, { foreignKey: 'idLivro', as: 'autores',
-//  through: {model: AutoresLivros}, otherKey: 'idAutor' });
-export default Autor;
+export default Author;

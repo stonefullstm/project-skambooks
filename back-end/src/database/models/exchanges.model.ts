@@ -1,8 +1,7 @@
-import { DATE } from 'sequelize';
-import { INTEGER, Model, STRING } from 'sequelize';
+import { DATE, INTEGER, Model } from 'sequelize';
 import db from '.';
-import Leitor from './leitores.model';
-import Livro from './livros.model';
+import Livro from './books.model';
+import Leitor from './readers.model';
 
 class Trocas extends Model {
   declare id: number;

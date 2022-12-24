@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('livros', {
+    await queryInterface.createTable('books', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,30 +14,30 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(13),
       },
-      titulo: {
+      title: {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
-      ano: {
+      year: {
         allowNull: false,
         type: Sequelize.STRING(4),
       },
-      paginas: {
+      pages: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      idLeitor: {
+      readerId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'leitores',
+          model: 'readers',
           key: 'id',
         },
-        field: 'id_leitor',
+        field: 'reader_id',
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('livros');
+    await queryInterface.dropTable('books');
   },
 };
