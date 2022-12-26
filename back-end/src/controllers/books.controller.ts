@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import booksService from '../services/books.service';
 import statusCodes from '../statusCodes';
-import { TAuthor } from '../types';
+import { TNewAuthor } from '../types';
 
 const getAllBooks = async (req: Request, res: Response) => {
   const books = await booksService.getAllBooks();
@@ -14,8 +14,8 @@ const deleteBook = async ( req: Request, res: Response) => {
   if (!result) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Book not found'});
   }
-  const book = await booksService.deleteBook(Number(id));
-  if (book) {
+  const deletedQty = await booksService.deleteBook(Number(id));
+  if (deletedQty) {
     return res.status(statusCodes.OK).json({ message: `Book deleted: ${id}`});
   };
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
@@ -24,16 +24,22 @@ const deleteBook = async ( req: Request, res: Response) => {
 
 const createBook = async (req: Request, res: Response) => {
   const { isbn, title, year, pages, readerId, authors} = req.body;
-  await booksService.createBook({isbn, title, year, pages, readerId, authors});
-  const idBook = (await booksService.getAllBooks()).length;
-  const promise = await authors.map((i: TAuthor) => booksService.createAuthor(i));
-  const b = await Promise.all(promise);
+  const newBook = await booksService.createBook({isbn, title, year, pages, readerId, authors});
+  const idBook = newBook.id;
   
-  const a = b.map((item: {
-    dataValues: any;
-    autores: any; id: number; 
-}) => booksService.createAuthorBook( idBook, item.dataValues.id));
-  await Promise.all(a);
+  const createdAuthors = await authors.map((author: string) => booksService.createAuthor({name: author}));
+  const newAuthors = await Promise.all(createdAuthors);
+  // const b = await Promise.all(createdAuthors);
+  
+  // const a = b.map((item: {
+  //   dataValues: any;
+  //   autores: any; id: number; 
+  // }) => booksService.createAuthorBook( idBook, item.dataValues.id));
+  // await Promise.all(a);
+  // console.log(newAuthors);
+  
+  const createdAuthorsBooks = await newAuthors.map((author: TNewAuthor) => booksService.createAuthorBook( idBook, author.id ));
+  await Promise.all(createdAuthorsBooks);
   return res.status(statusCodes.CREATED).json(req.body);
 };
   

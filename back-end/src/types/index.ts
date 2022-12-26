@@ -9,8 +9,23 @@ export type TBook = {
   authors: TAuthor[];
 };
 
+export type TNewBook = {
+  id: number;
+  isbn: string;
+  title: string;
+  year: string;
+  pages: number;
+  readerId: number;
+  authors: TAuthor[];
+};
+
 export type TAuthor = {
   id?: number;
+  name: string;
+};
+
+export type TNewAuthor = {
+  id: number;
   name: string;
 };
 

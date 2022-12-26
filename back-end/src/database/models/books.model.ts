@@ -51,9 +51,9 @@ Book.init({
   timestamps: false,
 });
 
-Reader.hasMany(Book, { foreignKey: 'reader_id', as: 'books' });
-Book.belongsTo(Reader, { foreignKey: 'reader_id', as: 'books' });
-Author.belongsToMany(Book, { foreignKey: 'reader_id', as: 'books',
+Reader.hasMany(Book, { foreignKey: 'reader_id', as: 'readers' });
+Book.belongsTo(Reader, { foreignKey: 'reader_id', as: 'readers' });
+Author.belongsToMany(Book, { foreignKey: 'author_id', as: 'books',
  through: AuthorsBooks, otherKey: 'book_id' });
 
 Book.belongsToMany(Author, { foreignKey: 'book_id', as: 'authors',
