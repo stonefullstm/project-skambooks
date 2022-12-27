@@ -36,9 +36,9 @@ const getReaderByEmail = async (req: Request, res: Response) => {
   res.status(statusCodes.OK).json({ token });
 };
 
-const insertReader = async ( req: Request, res: Response) => {
+const createReader = async ( req: Request, res: Response) => {
  
-  const result = await readersService.insertReader(req.body);
+  const result = await readersService.createReader(req.body);
   
   if (result) {
     return res.status(statusCodes.CREATED).json(req.body);
@@ -52,9 +52,9 @@ const updateReader = async ( req: Request, res: Response) => {
   if (!reader) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Reader not found'});
   }
-  const result = await readersService.updateReader(req.body, Number(id));
-  if (result) {
-    return res.status(statusCodes.OK).json(req.body);
+  const updatedQty = await readersService.updateReader(req.body, Number(id));
+  if (updatedQty) {
+    return res.status(statusCodes.OK).json({ id, ...req.body });
   }
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
 };
@@ -73,4 +73,4 @@ const deleteReader = async ( req: Request, res: Response) => {
   
 };
 
-export default { getReaderById, insertReader, getReaderByEmail, updateReader, deleteReader };
+export default { getReaderById, createReader, getReaderByEmail, updateReader, deleteReader };

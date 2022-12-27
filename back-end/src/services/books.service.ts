@@ -1,8 +1,7 @@
-import authorsBooksModel from '../database/models/authors-books.model';
-import authorsModel from '../database/models/authors.model';
+import Author, { default as authorsModel } from '../database/models/authors.model';
 import booksModel from '../database/models/books.model';
 import readersModel from '../database/models/readers.model';
-import { TAuthor, TAuthorBook, TBook, TNewAuthor, TNewBook } from '../types';
+import { TBook, TNewBook } from '../types';
 
 const getAllBooks = async (): Promise<TBook[]> => {
   const books = await booksModel.findAll({
@@ -15,7 +14,7 @@ const getAllBooks = async (): Promise<TBook[]> => {
 
 const getBookById = async (id: number): Promise<TBook> => {
   const book = await booksModel.findByPk(id, {
-    include: { model: authorsModel, as: 'autors', through: {attributes: []} }
+    include: { model: authorsModel, as: 'authors', through: {attributes: []} }
   });
   return book as unknown as TBook;
 };
@@ -28,31 +27,34 @@ const deleteBook = async (id: number): Promise<number> => {
 };
 
 const createBook = async (book: TBook): Promise<TNewBook> => {
-  const { isbn, title, year, pages, readerId } = book;
+  const { isbn, title, year, pages, readerId, authors } = book;
   const newBook = await booksModel.create({
     isbn,
     title,
     year,
     pages,
     readerId,
-  });
+    authors,
+  }, { include: [{model: Author, as: 'authors'}]});
   const createdBook = { id: newBook.dataValues.id, ...book };
   return createdBook;
 };
 
-const createAuthor = async (author: TAuthor): Promise<TNewAuthor> => {
-  const newAuthor = await authorsModel.create({
-     name: author.name,
-  });
-  return { id: newAuthor.dataValues.id, name: newAuthor.dataValues.name };
-};
+// const createAuthor = async (author: TAuthor): Promise<TNewAuthor> => {
+//   const newAuthor = await authorsModel.create({
+//      name: author.name,
+//   });
+//   return { id: newAuthor.dataValues.id, name: newAuthor.dataValues.name };
+// };
 
-const createAuthorBook = async (bookId: number, authorId: number): Promise<TAuthorBook> => {
+// const createAuthorBook = async (bookId: number, authorId: number): Promise<TAuthorBook> => {
+//   const authorBook: TAuthorBook = { bookId, authorId };
+//   console.log(authorBook);
   
-  const authorsBooks = await authorsBooksModel.create({
-    bookId, authorId,
-  });
-  return authorsBooks as TAuthorBook;
-};
+//   const authorsBooks = await authorsBooksModel.create({
+//     bookId, authorId,
+//   });
+//   return authorsBooks as TAuthorBook;
+// };
 
-export default { getAllBooks, deleteBook, getBookById, createBook, createAuthor, createAuthorBook };
+export default { getAllBooks, deleteBook, getBookById, createBook };
