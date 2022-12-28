@@ -3,30 +3,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('autores_livros', {
-      idLivro: {
+    await queryInterface.createTable('authors_books', {
+      bookId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'livros',
+          model: 'books',
           key: 'id',
         },
         onDelete: 'CASCADE',
-        field: 'id_livro',
+        field: 'book_id',
       },
-      idAutor: {
+      authorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'autores',
+          model: 'authors',
           key: 'id',
         },
         onDelete: 'CASCADE',
-        field: 'id_autor',
+        field: 'author_id',
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('autores_livros');
+    await queryInterface.dropTable('authors_books');
   },
 };

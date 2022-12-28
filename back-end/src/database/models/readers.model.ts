@@ -1,62 +1,63 @@
 import { INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
-class Leitor extends Model {
+class Reader extends Model {
   declare id: number;
-  declare nome: string;
-  declare endereco: string;
-  declare numero: string;
-  declare complemento: string;
-  declare cep: string;
-  declare bairro: string;
-  declare cidade: string;
-  declare estado: string;
-  declare telefone: string;
+  declare name: string;
+  declare address: string;
+  declare number: string;
+  declare complement: string;
+  declare zipCode: string;
+  declare district: string;
+  declare city: string;
+  declare state: string;
+  declare phone: string;
   declare email: string;
-  declare senha: string;
-  declare creditos: number;
+  declare password: string;
+  declare credits: number;
 }
 
-Leitor.init({
+Reader.init({
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: INTEGER,
   },
-  nome: {
+  name: {
     allowNull: false,
     type: STRING(255),
   },
-  endereco: {
+  address: {
     allowNull: false,
     type: STRING(255),
   },
-  numero: {
+  number: {
     allowNull: true,
     type: INTEGER,
   },
-  complemento: {
+  complement: {
     allowNull: true,
     type: STRING(255),
   },
-  cep: {
+  zipCode: {
     allowNull: false,
     type: STRING(8),
+    field: 'zip_code',
   },
-  bairro: {
+  district: {
     allowNull: false,
     type: STRING(255),
   },
-  cidade: {
+  city: {
     allowNull: false,
     type: STRING(255),
   },
-  estado: {
+  state: {
     allowNull: false,
     type: STRING(255),
   },
-  telefone: {
+  phone: {
     allowNull: false,
     type: STRING(11),
   },
@@ -64,11 +65,11 @@ Leitor.init({
     allowNull: false,
     type: STRING(255),
   },
-  senha: {
+  password: {
     allowNull: false,
     type: STRING(40),
   },
-  creditos: {
+  credits: {
     allowNull: false,
     type: INTEGER,
   }
@@ -77,8 +78,8 @@ Leitor.init({
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'leitores',
+  modelName: 'readers',
   timestamps: false,
 });
 
-export default Leitor;
+export default Reader;

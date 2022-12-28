@@ -3,20 +3,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('autores', {
+    await queryInterface.createTable('authors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nome: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('autores');
+    await queryInterface.dropTable('authors');
   },
 };

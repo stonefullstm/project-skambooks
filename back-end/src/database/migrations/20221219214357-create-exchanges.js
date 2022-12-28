@@ -3,53 +3,53 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('trocas', {
+    await queryInterface.createTable('exchanges', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      idRementente: {
+      senderId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'leitores',
+          model: 'readers',
           key: 'id',
         },
-        field: 'id_remetente',
+        field: 'sender_id',
       },
-      idDestinatario: {
+      receiverId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'leitores',
+          model: 'readers',
           key: 'id',
         },
-        field: 'id_destinatario',
+        field: 'receiver_id',
       },
-      idLivro: {
+      bookId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'livros',
+          model: 'books',
           key: 'id',
         },
-        field: 'id_livro',
+        field: 'book_id',
       },
-      dataEnvio: {
+      sendDate: {
         allowNull: false,
         type: Sequelize.DATE,
-        field: 'data_envio',
+        field: 'send_date',
       },
-      dataRecebimento: {
+      receiveDate: {
         allowNull: true,
         type: Sequelize.DATE,
-        field: 'data_recebimento',
+        field: 'receive_date',
       },
     });
   },
   down: async (queryInterface) => {
-    await queryInterface.dropTable('trocas');
+    await queryInterface.dropTable('exchanges');
   },
 };
