@@ -1,59 +1,60 @@
 import { DATE, INTEGER, Model } from 'sequelize';
 import db from '.';
-import Livro from './books.model';
-import Leitor from './readers.model';
+import Book from './books.model';
+import Reader from './readers.model';
 
-class Trocas extends Model {
+class Exchange extends Model {
   declare id: number;
-  declare idRemetente: number;
-  declare idDestinatario: number;
-  declare idLivro: number;
-  declare dataEnvio: string;
-  declare dataRecebimento: string;
+  declare senderId: number;
+  declare receiverId: number;
+  declare bookId: number;
+  declare sendDate: string;
+  declare receiveDate: string;
 }
 
-Trocas.init({
+Exchange.init({
   id: {
     type: INTEGER,
     primaryKey: true,
     allowNull: false,
     autoIncrement: true,
   },
-  idRemetente: {
+  senderId: {
     type: INTEGER,
     allowNull: false,
   },
-  idDestinatario: {
+  receiverId: {
     type: INTEGER,
     allowNull: false,
   },
-  idLivro: {
+  bookId: {
     type: INTEGER,
     allowNull: false,
   },
-  dataEnvio: {
+  sendDate: {
     type: DATE,
-    allowNull: false,
+    allowNull: true,
+    defaultValue: new Date(),
   },
-  dataRecebimento: {
+  receiveDate: {
     type: DATE,
-    allowNull: false,
+    allowNull: true,
   },
 }, 
 {
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  modelName: 'trocas',
+  modelName: 'exchanges',
   timestamps: false,
 });
-Leitor.hasMany(Trocas, { foreignKey: 'idRemetente', as: 'remetente' });
-Trocas.belongsTo(Leitor, { foreignKey: 'idRemetente', as: 'remetente' });
+Reader.hasMany(Exchange, { foreignKey: 'senderId', as: 'sender' });
+Exchange.belongsTo(Reader, { foreignKey: 'senderId', as: 'sender' });
 
-Leitor.hasMany(Trocas, { foreignKey: 'idDestinatario', as: 'destinatario' });
-Trocas.belongsTo(Leitor, { foreignKey: 'idDestinatario', as: 'destinatario' });
+Reader.hasMany(Exchange, { foreignKey: 'receiverId', as: 'receiver' });
+Exchange.belongsTo(Reader, { foreignKey: 'receiverId', as: 'receiver' });
 
-Livro.hasMany(Trocas, { foreignKey: 'idLivro', as: 'livros-trocados' });
-Trocas.belongsTo(Livro, { foreignKey: 'idLivro', as: 'livros-trocados' });
+Book.hasMany(Exchange, { foreignKey: 'bookId', as: 'books-exchanged' });
+Exchange.belongsTo(Book, { foreignKey: 'bookId', as: 'books-exchanged' });
 
-export default Trocas;
+export default Exchange;

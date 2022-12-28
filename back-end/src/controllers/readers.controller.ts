@@ -8,7 +8,7 @@ require('dotenv/config');
 const secret = process.env.JWTSECRET || 'seusecretdetoken';
 
 const getReaderById = async ( req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id } = req.body.user;
   const result = await readersService.getReaderById(Number(id));
   if (result) {
     return res.status(statusCodes.OK).json(result);
@@ -60,7 +60,7 @@ const updateReader = async ( req: Request, res: Response) => {
 };
 
 const deleteReader = async ( req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id } = req.body.user;
   const result = await readersService.getReaderById(Number(id));
   if (!result) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Reader not found'});

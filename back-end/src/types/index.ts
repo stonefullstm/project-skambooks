@@ -55,3 +55,21 @@ export type TReader = {
   password: string;
   credits: number;
 };
+
+export type TExchange = {
+  id?: number;
+  senderId: number;
+  receiverId: number;
+  bookId: number;
+  sendDate: string;
+  receiveDate: string;
+}
+
+export type TNewExchange = {
+  id: number;
+  senderId: number;
+  receiverId: number;
+  bookId: number;
+  sendDate: string;
+  receiveDate: string;
+}
