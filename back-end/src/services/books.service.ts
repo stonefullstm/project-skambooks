@@ -40,21 +40,4 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
   return createdBook;
 };
 
-// const createAuthor = async (author: TAuthor): Promise<TNewAuthor> => {
-//   const newAuthor = await authorsModel.create({
-//      name: author.name,
-//   });
-//   return { id: newAuthor.dataValues.id, name: newAuthor.dataValues.name };
-// };
-
-// const createAuthorBook = async (bookId: number, authorId: number): Promise<TAuthorBook> => {
-//   const authorBook: TAuthorBook = { bookId, authorId };
-//   console.log(authorBook);
-  
-//   const authorsBooks = await authorsBooksModel.create({
-//     bookId, authorId,
-//   });
-//   return authorsBooks as TAuthorBook;
-// };
-
 export default { getAllBooks, deleteBook, getBookById, createBook };

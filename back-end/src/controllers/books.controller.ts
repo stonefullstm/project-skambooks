@@ -22,23 +22,9 @@ const deleteBook = async ( req: Request, res: Response) => {
 };
 
 const createBook = async (req: Request, res: Response) => {
-  const { isbn, title, year, pages, readerId, authors} = req.body;
+  const { isbn, title, year, pages, authors} = req.body;
+  const { id: readerId } = req.body.user;
   const newBook = await booksService.createBook({isbn, title, year, pages, readerId, authors});
-  // const idBook = newBook.id;
-  
-  // const createdAuthors = await authors.map((author: string) => booksService.createAuthor({name: author}));
-  // const newAuthors = await Promise.all(createdAuthors);
-  // const b = await Promise.all(createdAuthors);
-  
-  // const a = b.map((item: {
-  //   dataValues: any;
-  //   autores: any; id: number; 
-  // }) => booksService.createAuthorBook( idBook, item.dataValues.id));
-  // await Promise.all(a);
-  // console.log(newAuthors, idBook);
-  
-  // const createdAuthorsBooks = await newAuthors.map((author: TNewAuthor) => booksService.createAuthorBook( idBook, author.id ));
-  // await Promise.all(createdAuthorsBooks);
   return res.status(statusCodes.CREATED).json(newBook);
 };
   

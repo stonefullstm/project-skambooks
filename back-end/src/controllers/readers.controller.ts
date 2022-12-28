@@ -47,7 +47,7 @@ const createReader = async ( req: Request, res: Response) => {
 };
 
 const updateReader = async ( req: Request, res: Response) => {
-  const { id } = req.params;
+  const { id } = req.body.user;
   const reader = await readersService.getReaderById(Number(id));
   if (!reader) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Reader not found'});
