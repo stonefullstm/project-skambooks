@@ -36,8 +36,7 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
     readerId,
     authors,
   }, { include: [{model: Author, as: 'authors'}]});
-  const createdBook = { id: newBook.dataValues.id, ...book };
-  return createdBook;
+  return newBook as unknown as TNewBook;
 };
 
 export default { getAllBooks, deleteBook, getBookById, createBook };

@@ -7,6 +7,15 @@ const getAllExchanges = async (req: Request, res: Response) => {
   res.status(statusCodes.OK).json(exchanges);
 };
 
+const getExchangeById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await exchangesService.getExchangeById(Number(id));
+  if (result) {
+    return res.status(statusCodes.OK).json(result);
+  }
+  return res.status(statusCodes.NOT_FOUND).json({ message: 'Exchange not found'});
+}
+
 const createExchange = async (req: Request, res: Response) => {
   const { receiverId, bookId } = req.body;
   const { id: senderId } = req.body.user;
@@ -14,4 +23,19 @@ const createExchange = async (req: Request, res: Response) => {
   return res.status(statusCodes.CREATED).json(newExchange);
 }
 
-export default { getAllExchanges, createExchange };
+const deleteExchange = async ( req: Request, res: Response) => {
+  const { id } = req.params;
+  const { id: readerId } = req.body.user;
+  const result = await exchangesService.getExchangeById(Number(id));
+  if (!result) {
+    return res.status(statusCodes.NOT_FOUND).json({ message: 'Exchange not found'});
+  }
+  const exchange = await exchangesService.deleteExchange(Number(id));
+  if (exchange) {
+    return res.status(statusCodes.OK).json({ message: `Exchange deleted: ${id}`});
+  };
+  return res.status(statusCodes.ERROR).json({ message: 'Error'});
+  
+};
+
+export default { getAllExchanges, createExchange, deleteExchange, getExchangeById };
