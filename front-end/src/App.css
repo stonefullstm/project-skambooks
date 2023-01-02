@@ -1,38 +1,54 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: auto;
+  padding: 10px 100px 100px 100px;
+ /*  border: 2px solid black; */
+  border-radius: 5px;
+  background-color: rgb(163, 200, 189);
+}
+.email {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 30px;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  color: black;
+  font-size: larger;
 }
 
-.App-link {
-  color: #61dafb;
+.password {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 100px;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button {
+  width: 255px;
+  height: 30px;
+  text-align: center;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+}
+
+.title {
+  margin-top: 20px;
 }

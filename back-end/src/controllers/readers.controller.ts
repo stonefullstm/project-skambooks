@@ -20,9 +20,12 @@ const getReaderByEmail = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const user = await readersService.getReaderByEmail(email);
   
-  if (!user || !bcrypt.compareSync(password, user.password) ) {
+  if (!user || !user.id) {
     return res.status(statusCodes.NOT_FOUND).json({message: 'User not found'});
   };
+  if (!bcrypt.compareSync(password, user.password) ) {
+    return res.status(statusCodes.NOT_FOUND).json({message: 'Invalid password'});
+  }
   const userData = { 
     id: user.id,
     email,
