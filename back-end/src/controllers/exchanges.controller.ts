@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import exchangesService from '../services/exchanges.service';
 import statusCodes from '../statusCodes';
 
-const getAllExchanges = async (req: Request, res: Response) => {
-  const exchanges = await exchangesService.getAllExchanges();
+const getAllExchangesByReader = async (req: Request, res: Response) => {
+  const { id } = req.body.user;
+  const exchanges = await exchangesService.getAllExchangesByReader(id);
   res.status(statusCodes.OK).json(exchanges);
 };
 
@@ -38,4 +39,4 @@ const deleteExchange = async ( req: Request, res: Response) => {
   
 };
 
-export default { getAllExchanges, createExchange, deleteExchange, getExchangeById };
+export default { getAllExchangesByReader, createExchange, deleteExchange, getExchangeById };
