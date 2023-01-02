@@ -39,9 +39,13 @@ class initialPage extends Component {
       },
       body: JSON.stringify(update),
     };
-    const { message } = await login(options);
+    const { message, token } = await login(options);
     if (message) {
       alert(message);
+    } if (token) {
+      localStorage.setItem('token', token);
+      const { history } = this.props;
+      history.push('/skambooks');
     }
   };
 
