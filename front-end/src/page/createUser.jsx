@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { myCep, createReader } from '../services/fetchs';
+import { createReader, myCep } from '../services/fetchs';
 
 const MIN_LENGTH_INPUT = 6;
 export default class createUser extends Component {
@@ -16,7 +16,7 @@ export default class createUser extends Component {
     phone: '',
     email: '',
     password: '',
-    credits: '',
+    // credits: '',
     buttonIsDisabled: true,
   }
   handleChange = (event) => {
@@ -47,7 +47,7 @@ export default class createUser extends Component {
   }
   handleSubmit = async () => {
     const { name, address, number, complement, zipCode,
-      district, city, state, phone, email, password, credits } = this.state;
+      district, city, state, phone, email, password } = this.state;
     const update = {
       name: name,
       address: address,
@@ -60,7 +60,7 @@ export default class createUser extends Component {
       phone: phone,
       email: email,
       password: password,
-      credits: credits,
+      // credits: credits,
     };
 
     const options = {
@@ -92,7 +92,7 @@ export default class createUser extends Component {
         <input type="text" name='phone' onChange={this.handleChange} className='email' placeholder='Phone'/>
         <input type="text" name='email' onChange={this.handleChange} className='email' placeholder='Email'/>
         <input type="text" name='password' onChange={this.handleChange} className='email' placeholder='Password'/>
-        <input type="text" name='credits' onChange={this.handleChange} className='email' placeholder='Credits'/>
+        {/* <input type="text" name='credits' onChange={this.handleChange} className='email' placeholder='Credits'/> */}
         <div className='div-form'>
         <button type="button" disabled={ buttonIsDisabled } onClick={this.handleSubmit} className='submit'>Salvar</button>
         <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
