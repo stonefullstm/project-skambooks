@@ -2,6 +2,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import initialPage from './page/initialPage';
 import skambooks from './page/skambooks';
+import createUser from './page/createUser';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ initialPage } />
         <Route exact path="/skambooks" component={ skambooks } />
+        <Route exact path="/create-user" component={ createUser } />
       </Switch>
     </div>
   );
