@@ -4,7 +4,8 @@ import validateToken from '../middleware/validateToken';
 
 const routerExchanges = Router();
 routerExchanges.get('/exchanges', validateToken, exchangesController.getAllExchangesByReader);
-routerExchanges.get('/exchanges/:id', exchangesController.getExchangeById);
+routerExchanges.get('/exchanges/:id', validateToken, exchangesController.getExchangeById);
 routerExchanges.post('/exchanges', validateToken, exchangesController.createExchange);
+routerExchanges.put('/exchanges/:id', validateToken, exchangesController.confirmExchange);
 
 export default routerExchanges;

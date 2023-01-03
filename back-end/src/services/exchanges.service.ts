@@ -43,4 +43,14 @@ const deleteExchange = async (id: number): Promise<number> => {
   return deletedQty;
 }
 
-export default { getAllExchangesByReader, createExchange, deleteExchange, getExchangeById };
+const confirmExchange = async (id: number): Promise<number> => {
+  const [updatedQty] = await exchangesModel.update({ receiveDate: new Date() },
+    { where: { id } });
+  return updatedQty;
+}
+
+export default { getAllExchangesByReader, 
+  createExchange, 
+  deleteExchange, 
+  getExchangeById, 
+  confirmExchange };
