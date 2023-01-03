@@ -1,12 +1,20 @@
+import { Op } from 'sequelize';
 import exchangesModel from '../database/models/exchanges.model';
 import readersModel from '../database/models/readers.model';
 import { TExchange, TNewExchange } from '../types';
 
-const getAllExchanges = async (): Promise<TExchange[]> => {
+const getAllExchangesByReader = async (id: number): Promise<TExchange[]> => {
   const exchanges = exchangesModel.findAll({
+    where: {
+      [Op.or]: [
+        { senderId: id },
+        { receiverId: id }
+      ]
+    },
     include: [{ model: readersModel, as: 'sender', attributes: {exclude: ['password']} },
     { model: readersModel, as: 'receiver', attributes: {exclude: ['password']} },],
-    attributes: {exclude: ['senderId', 'receiverId']}
+    attributes: {exclude: ['senderId', 'receiverId']},
+    order: [['sendDate', 'DESC']]
   });
   return exchanges;
 }
@@ -35,4 +43,14 @@ const deleteExchange = async (id: number): Promise<number> => {
   return deletedQty;
 }
 
-export default { getAllExchanges, createExchange, deleteExchange, getExchangeById };
+const confirmExchange = async (id: number): Promise<number> => {
+  const [updatedQty] = await exchangesModel.update({ receiveDate: new Date() },
+    { where: { id } });
+  return updatedQty;
+}
+
+export default { getAllExchangesByReader, 
+  createExchange, 
+  deleteExchange, 
+  getExchangeById, 
+  confirmExchange };

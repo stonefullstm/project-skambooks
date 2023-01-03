@@ -4,7 +4,7 @@ import validateToken from '../middleware/validateToken';
 
 const routerBooks = Router();
 routerBooks.delete('/books/:id', validateToken, booksController.deleteBook);
-routerBooks.get('/books', booksController.getAllBooks);
+routerBooks.get('/books', validateToken, booksController.getAllBooks);
 routerBooks.post('/books', validateToken, booksController.createBook);
 
 export default routerBooks;
