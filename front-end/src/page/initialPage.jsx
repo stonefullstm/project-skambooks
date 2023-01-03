@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { login } from '../services/fetchs';
+import { Link } from "react-router-dom";
 /* import { connect } from 'react-redux'; */
 
 const MIN_LENGTH_INPUT = 6;
@@ -64,6 +65,7 @@ class initialPage extends Component {
         name='password'
         onChange={ this.handleChange }
         className='password'/>
+        <Link to='/create-user' className='link'>Create user</Link>
        <button type='button'
         className='button' disabled={ buttonIsDisabled } onClick={ this.handClick }>login</button>
       </div>

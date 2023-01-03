@@ -1,3 +1,6 @@
+body {
+  background-color: aquamarine;
+}
 .App {
   display: flex;
   flex-direction: column;
@@ -12,7 +15,7 @@
   padding: 10px 100px 100px 100px;
  /*  border: 2px solid black; */
   border-radius: 5px;
-  background-color: rgb(163, 200, 189);
+  background-color: rgb(105, 144, 131);
 }
 .email {
   width: 250px;
@@ -29,7 +32,7 @@
 .password {
   width: 250px;
   height: 30px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   background-color: rgb(208, 201, 201);
   box-shadow: 0 0 0 0;
   border: 0 none;
@@ -51,4 +54,52 @@
 
 .title {
   margin-top: 20px;
+}
+
+.link {
+  margin-right: 150px;
+  margin-bottom: 30px;
+  text-decoration:none;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.create-user {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 10px 200px 100px 150px;
+  border-radius: 5px;
+  background-color: rgb(105, 144, 131);
+}
+
+.submit {
+  width: 80px;
+  height: 30px;
+  text-align: center;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+}
+
+.cancelar {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+  margin-left: 100px;
+}
+
+.div-form {
+  display: flex;
+  flex-direction: row;
 }
