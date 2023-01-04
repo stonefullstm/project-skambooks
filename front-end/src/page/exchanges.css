@@ -1,0 +1,9 @@
+.lists {
+  /* text-align: center; */
+  height: 60px;
+  margin-bottom: 10px;
+  background-color: cornflowerblue;
+  display: flex;
+  justify-content: space-between;
+  width: 2000px;
+}

@@ -36,14 +36,14 @@ class skambooks extends Component {
     console.log(book);
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
-        return ( <di key={ index } className='list'>
+        return ( <div key={ index } className='list'>
           <li className='li'>{ item.title }</li>
-          <di className='div-button'>
+          <div className='div-button'>
           <button type='button' className='button-list'>E</button>
           <button type='button' className='button-list'> - </button>
           <button type='button' className='button-list'>Atualizar</button>
-          </di>
-        </di>)
+          </div>
+        </div>)
       }
       return null;
   });
