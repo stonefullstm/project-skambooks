@@ -1,4 +1,5 @@
-import { Op } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
+import sequelize from '../database/models';
 import booksModel from '../database/models/books.model';
 import exchangesModel from '../database/models/exchanges.model';
 import readersModel from '../database/models/readers.model';
@@ -46,9 +47,31 @@ const deleteExchange = async (id: number): Promise<number> => {
 }
 
 const confirmExchange = async (id: number): Promise<number> => {
-  const [updatedQty] = await exchangesModel.update({ receiveDate: new Date() },
-    { where: { id } });
-  return updatedQty;
+  return sequelize.transaction(async (t: Transaction) => {
+    const [updatedQty] = await exchangesModel.update({ receiveDate: new Date() },
+      { where: { id } });
+    const exchange = await exchangesModel.findByPk(id);
+    const updatedExchange = exchange as unknown as TExchange;
+    await readersModel.update(
+      { credits: sequelize.literal('credits + 1')},
+      {
+        where: { id: updatedExchange.senderId },
+      }
+    );
+    await readersModel.update(
+      { credits: sequelize.literal('credits - 1')},
+      {
+        where: { id: updatedExchange.receiverId },
+      }
+    );
+    await booksModel.update(
+      { readerId: updatedExchange.receiverId },
+      {
+        where: { id: updatedExchange.bookId },
+      }
+    )
+    return updatedQty;
+  });
 }
 
 export default { getAllExchangesByReader, 
