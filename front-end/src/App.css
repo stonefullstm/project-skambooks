@@ -156,3 +156,17 @@ li {
   outline: 0;
   font-size: larger;
 }
+
+.Link {
+  text-decoration:none;
+}
+.filtered {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-left: 38%;
+ /*  border: 1px solid black; */
+  padding: 0px 100px 0px 100px;
+  background-color: darkgray;
+  margin-bottom: 15px;
+}
