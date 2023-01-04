@@ -170,3 +170,10 @@ li {
   background-color: darkgray;
   margin-bottom: 15px;
 }
+
+.li-exchange {
+  margin-left: 40px;
+  /* margin-top: 2px; */
+  display: flex;
+  flex-direction: column;
+};
