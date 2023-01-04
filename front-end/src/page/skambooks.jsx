@@ -50,7 +50,7 @@ class skambooks extends Component {
     return (
       <div>
         <h1>SKAMBOOKS</h1>
-        <header className='header'><h2 className='book'>My books</h2><h2>My exchanges</h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
+        <header className='header'><h2 className='book'>My books</h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
           <h1>My books</h1>
           <ol>{ list }</ol>
       </div>

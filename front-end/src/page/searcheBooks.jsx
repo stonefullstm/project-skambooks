@@ -54,14 +54,14 @@ class searcheBooks extends Component {
     return (
       <div>
         <h1>SKAMBOOKS</h1>
-        <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2>My exchanges</h2><h2 className='search'>Search books</h2></header>
+        <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'>Search books</h2></header>
           <h1>Search books</h1>
         <div onChange={ this.handleChange } className='filtered'>
         <input type="radio" value="All" name="gender"/> <h2>All</h2>
         <input type="radio" value="Title" name="gender"/> <h2>Title</h2>
         <input type="radio" value="Author" name="gender"/> <h2>Author</h2>
         </div>
-        { filter === 'Author' || filter === 'Title' ? <input type='text' className='email' onChange={ this.change }/> : null }
+        { filter === 'Author' || filter === 'Title' ? <input type='text' className='email' onChange={ this.change } placeholder='search'/> : null }
          <ol>
          { list }   
          </ol>  
