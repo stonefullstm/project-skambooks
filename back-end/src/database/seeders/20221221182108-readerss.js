@@ -14,8 +14,8 @@ module.exports = {
         state: 'PA',
         phone: '93991000000',
         email: 'jotac@test.com',
-        password: '123456',
-        credits: 0,
+        password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
+        // credits: 0,
       },
       {
         name: 'José Antônio',
@@ -28,9 +28,24 @@ module.exports = {
         state: 'PA',
         phone: '93991000001',
         email: 'jotaantonio@test.com',
-        password: '123457',
-        credits: 0,
+        password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
+        // credits: 0,
       },
+      {
+        name: 'João Almeida',
+        address: 'Av. das Mangueiras',
+        number: 225,
+        complement: 'Prox.Hospital das Clínicas',
+        zip_code: '68100000',
+        district: 'Aldeia',
+        city: 'Santarém',
+        state: 'PA',
+        phone: '93991001111',
+        email: 'jalmeida@test.com',
+        password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
+        // credits: 0
+      }
+      
     ], {}),
 
   down: async (queryInterface) => queryInterface.bulkDelete('readers', null, {}),

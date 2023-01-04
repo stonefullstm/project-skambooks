@@ -11,6 +11,12 @@ module.exports = {
       },
       {
         name: 'Suzana Paz Enriquez',
+      },
+      {
+        name: 'J. Mark G. Williams',
+      },
+      {
+        name: 'Danny Penman',
       }
     ], {}),
 

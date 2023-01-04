@@ -57,8 +57,15 @@ module.exports = {
         type: Sequelize.STRING(255),
       },
       credits: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      newReader: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+        field: 'new_reader',
       }
     });
   },

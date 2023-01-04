@@ -1,4 +1,4 @@
-import { INTEGER, Model, STRING } from 'sequelize';
+import { BOOLEAN, INTEGER, Model, STRING } from 'sequelize';
 import db from '.';
 
 class Reader extends Model {
@@ -15,6 +15,7 @@ class Reader extends Model {
   declare email: string;
   declare password: string;
   declare credits: number;
+  declare newReader: boolean;
 }
 
 Reader.init({
@@ -67,11 +68,17 @@ Reader.init({
   },
   password: {
     allowNull: false,
-    type: STRING(40),
+    type: STRING(255),
   },
   credits: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
+    defaultValue: 0,
+  },
+  newReader: {
+    allowNull: true,
+    type: BOOLEAN,
+    defaultValue: 1,
   }
 },
 {
