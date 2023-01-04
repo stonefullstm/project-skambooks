@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import booksModel from '../database/models/books.model';
 import exchangesModel from '../database/models/exchanges.model';
 import readersModel from '../database/models/readers.model';
 import { TExchange, TNewExchange } from '../types';
@@ -12,8 +13,9 @@ const getAllExchangesByReader = async (id: number): Promise<TExchange[]> => {
       ]
     },
     include: [{ model: readersModel, as: 'sender', attributes: {exclude: ['password']} },
-    { model: readersModel, as: 'receiver', attributes: {exclude: ['password']} },],
-    attributes: {exclude: ['senderId', 'receiverId']},
+    { model: readersModel, as: 'receiver', attributes: {exclude: ['password']} },
+    { model: booksModel, as: 'bookExchanged' },],
+    attributes: {exclude: ['senderId', 'receiverId', 'bookId']},
     order: [['sendDate', 'DESC']]
   });
   return exchanges;
