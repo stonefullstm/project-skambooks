@@ -44,6 +44,10 @@ const confirmExchange = async (req: Request, res: Response) => {
   if (result.receiverId != readerId) {
     return res.status(statusCodes.BAD_REQUEST).json({ message: 'Reader cannot confirm exchange' });
   }
+  const reader = await readersService.getReaderById(readerId);
+  if (!reader || reader.credits === 0) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Reader has no credits' });
+  }
   const updatedQty = await exchangesService.confirmExchange(Number(id));
   if (updatedQty) {
     const result = await exchangesService.getExchangeById(Number(id));
@@ -58,6 +62,9 @@ const deleteExchange = async ( req: Request, res: Response) => {
   const result = await exchangesService.getExchangeById(Number(id));
   if (!result) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Exchange not found'});
+  }
+  if (result.receiveDate) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Confirmed exchange cannot be deleted'});
   }
   if (result.receiverId != readerId) {
     return res.status(statusCodes.UNAUTHORIZED).json({ message: 'Reader cannot delete exchange' });
