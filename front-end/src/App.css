@@ -42,6 +42,7 @@ body {
 }
 
 .button {
+  cursor: pointer;
   width: 255px;
   height: 30px;
   text-align: center;
@@ -77,6 +78,7 @@ body {
 }
 
 .submit {
+  cursor: pointer;
   width: 80px;
   height: 30px;
   text-align: center;
@@ -88,6 +90,7 @@ body {
 }
 
 .cancelar {
+  cursor: pointer;
   width: 100px;
   height: 30px;
   text-align: center;
@@ -102,4 +105,68 @@ body {
 .div-form {
   display: flex;
   flex-direction: row;
+}
+
+.header {
+  display: flex;
+  background-color: darkgray;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.book {
+  margin-left: 150px;
+}
+.search {
+  margin-right: 650px;
+}
+
+.list {
+  /* text-align: center; */
+  height: 50px;
+  margin-bottom: 10px;
+  background-color: cornflowerblue;
+  display: flex;
+  justify-content: space-between;
+  width: 2000px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.li {
+  margin-left: 20px;
+  font-size: 35px;
+}
+.div-button {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  height: 30px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+.button-list {
+  cursor: pointer;
+  width: 90px;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+}
+
+.Link {
+  text-decoration:none;
+}
+.filtered {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-left: 38%;
+ /*  border: 1px solid black; */
+  padding: 0px 100px 0px 100px;
+  background-color: darkgray;
+  margin-bottom: 15px;
 }

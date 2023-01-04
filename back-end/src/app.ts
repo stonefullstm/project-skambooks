@@ -4,7 +4,6 @@ import routerBooks from './routes/books.routes';
 import routerExchanges from './routes/exchanges.routes';
 import routerReader from './routes/readers.routes';
 
-
 const app = express();
 app.use(cors({
   origin: '*'
