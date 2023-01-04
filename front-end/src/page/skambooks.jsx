@@ -3,6 +3,7 @@ import { requiretBooks } from '../actions/action';
 import { connect } from 'react-redux';
 import { getAllBooks, getReaderById } from '../services/fetchs';
 import '../App.css';
+import { Link } from "react-router-dom";
 
 class skambooks extends Component {
   state = {
@@ -49,7 +50,8 @@ class skambooks extends Component {
     return (
       <div>
         <h1>SKAMBOOKS</h1>
-        <header className='header'><h2 className='book'>My books</h2><h2>My exchanges</h2><h2 className='search'>Search books</h2></header>
+        <header className='header'><h2 className='book'>My books</h2><h2>My exchanges</h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
+          <h1>My books</h1>
           <ol>{ list }</ol>
       </div>
     )

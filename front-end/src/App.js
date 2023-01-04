@@ -3,6 +3,7 @@ import './App.css';
 import initialPage from './page/initialPage';
 import skambooks from './page/skambooks';
 import createUser from './page/createUser';
+import searcheBooks from './page/searcheBooks';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route exact path="/" component={ initialPage } />
         <Route exact path="/skambooks" component={ skambooks } />
         <Route exact path="/create-user" component={ createUser } />
+        <Route exact path='/search' component={ searcheBooks } />
       </Switch>
     </div>
   );
