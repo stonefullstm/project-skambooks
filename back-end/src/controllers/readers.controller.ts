@@ -40,7 +40,11 @@ const getReaderByEmail = async (req: Request, res: Response) => {
 };
 
 const createReader = async ( req: Request, res: Response) => {
- 
+  const { email } = req.body;
+  const user = await readersService.getReaderByEmail(email);
+  if (user && user.email) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'E-mail already exists'});
+  }
   const result = await readersService.createReader(req.body);
   
   if (result) {

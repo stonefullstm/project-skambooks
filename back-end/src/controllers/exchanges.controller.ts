@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import booksService from '../services/books.service';
 import exchangesService from '../services/exchanges.service';
+import readersService from '../services/readers.service';
 import statusCodes from '../statusCodes';
 
 const getAllExchangesByReader = async (req: Request, res: Response) => {
@@ -20,6 +22,14 @@ const getExchangeById = async (req: Request, res: Response) => {
 const createExchange = async (req: Request, res: Response) => {
   const { receiverId, bookId } = req.body;
   const { id: senderId } = req.body.user;
+  const book = await booksService.getBookById(bookId);
+  if (!book || book.readerId !== senderId) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Book is not owned by this reader' });
+  }
+  const reader = await readersService.getReaderById(receiverId);
+  if (!reader || reader.credits === 0) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Reader has no credits' });
+  }
   const newExchange = await exchangesService.createExchange({ senderId, receiverId, bookId, sendDate: '', receiveDate: '' });
   return res.status(statusCodes.CREATED).json(newExchange);
 }
@@ -32,7 +42,7 @@ const confirmExchange = async (req: Request, res: Response) => {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Exchange not found'});
   }
   if (result.receiverId != readerId) {
-    return res.status(statusCodes.UNAUTHORIZED).json({ message: 'Reader cannot confirm exchange' });
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Reader cannot confirm exchange' });
   }
   const updatedQty = await exchangesService.confirmExchange(Number(id));
   if (updatedQty) {

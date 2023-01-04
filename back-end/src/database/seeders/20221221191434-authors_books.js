@@ -14,6 +14,14 @@ module.exports = {
       {
         book_id: 2,
         author_id: 3,
+      },
+      {
+        book_id: 3,
+        author_id: 4,
+      },
+      {
+        book_id: 3,
+        author_id: 5,
       }
     ], {}),
 

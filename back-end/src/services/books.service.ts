@@ -1,7 +1,7 @@
 import Author, { default as authorsModel } from '../database/models/authors.model';
 import booksModel from '../database/models/books.model';
 import readersModel from '../database/models/readers.model';
-import { TBook, TNewBook } from '../types';
+import { TBook, TNewBook, TReader } from '../types';
 
 const getAllBooks = async (): Promise<TBook[]> => {
   const books = await booksModel.findAll({
@@ -36,6 +36,17 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
     readerId,
     authors,
   }, { include: [{model: Author, as: 'authors'}]});
+  const reader = await readersModel.findByPk(readerId, {
+    attributes: { exclude: ['password'] },
+  });
+  const newReader = reader as unknown as TReader;
+  if (newReader && newReader.newReader) {
+    await readersModel.update({ credits: 1, newReader: 0},
+      {
+        where: { id: readerId },
+      }
+    )
+  }
   return newBook as unknown as TNewBook;
 };
 

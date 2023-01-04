@@ -54,6 +54,7 @@ export type TReader = {
   email: string;
   password: string;
   credits: number;
+  newReader: boolean;
 };
 
 export type TExchange = {
