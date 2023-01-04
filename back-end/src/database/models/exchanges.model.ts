@@ -54,7 +54,7 @@ Exchange.belongsTo(Reader, { foreignKey: 'senderId', as: 'sender' });
 Reader.hasMany(Exchange, { foreignKey: 'receiverId', as: 'receiver' });
 Exchange.belongsTo(Reader, { foreignKey: 'receiverId', as: 'receiver' });
 
-Book.hasMany(Exchange, { foreignKey: 'bookId', as: 'books-exchanged' });
-Exchange.belongsTo(Book, { foreignKey: 'bookId', as: 'books-exchanged' });
+Book.hasMany(Exchange, { foreignKey: 'bookId', as: 'bookExchanged' });
+Exchange.belongsTo(Book, { foreignKey: 'bookId', as: 'bookExchanged' });
 
 export default Exchange;

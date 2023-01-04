@@ -1,3 +1,5 @@
+import { Transaction } from 'sequelize';
+import sequelize from '../database/models';
 import Author, { default as authorsModel } from '../database/models/authors.model';
 import booksModel from '../database/models/books.model';
 import readersModel from '../database/models/readers.model';
@@ -28,26 +30,24 @@ const deleteBook = async (id: number): Promise<number> => {
 
 const createBook = async (book: TBook): Promise<TNewBook> => {
   const { isbn, title, year, pages, readerId, authors } = book;
-  const newBook = await booksModel.create({
-    isbn,
-    title,
-    year,
-    pages,
-    readerId,
-    authors,
-  }, { include: [{model: Author, as: 'authors'}]});
-  const reader = await readersModel.findByPk(readerId, {
-    attributes: { exclude: ['password'] },
+  return sequelize.transaction(async (t: Transaction) => {
+    const newBook = await booksModel.create({
+      isbn, title, year, pages, readerId, authors,
+    }, { include: [{model: Author, as: 'authors'}]},
+    );
+    const reader = await readersModel.findByPk(readerId, {
+      attributes: { exclude: ['password'] },
+    });
+    const newReader = reader as unknown as TReader;
+    if (newReader && newReader.newReader) {
+      await readersModel.update({ credits: 1, newReader: 0},
+        {
+          where: { id: readerId },
+        },        
+      )
+    }
+    return newBook as unknown as TNewBook;
   });
-  const newReader = reader as unknown as TReader;
-  if (newReader && newReader.newReader) {
-    await readersModel.update({ credits: 1, newReader: 0},
-      {
-        where: { id: readerId },
-      }
-    )
-  }
-  return newBook as unknown as TNewBook;
 };
 
 export default { getAllBooks, deleteBook, getBookById, createBook };
