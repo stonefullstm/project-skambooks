@@ -50,8 +50,13 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
   });
 };
 
-// const updateBook = async (book: TBook) => {
-  
-// }
+const updateBook = async (book: TBook, id: number): Promise<number> => {
+  const { isbn, title, year, pages } = book;
+  const [updatedQty] = await booksModel.update({
+    isbn, title, year, pages},
+    { where: { id }},
+  );
+  return updatedQty;
+}
 
-export default { getAllBooks, deleteBook, getBookById, createBook };
+export default { getAllBooks, deleteBook, getBookById, createBook, updateBook };

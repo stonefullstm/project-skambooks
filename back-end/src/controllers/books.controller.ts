@@ -28,8 +28,26 @@ const createBook = async (req: Request, res: Response) => {
   return res.status(statusCodes.CREATED).json(newBook);
 };
   
+const updateBook = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { id: readerId } = req.body.user;
+  const result = await booksService.getBookById(Number(id));
+  if (!result) {
+    return res.status(statusCodes.NOT_FOUND).json({ message: 'Book not found'});
+  }
+  if (result.readerId !== readerId) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Book is not owned by this reader'});
+  }
+  const updatedQty = await booksService.updateBook( req.body, Number(id));
+  if (updatedQty) {
+    return res.status(statusCodes.OK).json({ id, ...req.body });
+  }
+  return res.status(statusCodes.ERROR).json({ message: 'Error'});
+}
+
 export default {
   getAllBooks,
   deleteBook,
   createBook,
+  updateBook,
 };
