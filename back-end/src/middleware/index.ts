@@ -34,6 +34,15 @@ const bookSchema = Joi.object(
   }
 )
 
+const updateBookSchema = Joi.object(
+  {
+    isbn: Joi.string().required(),
+    title: Joi.string().required(),
+    year: Joi.string().length(4).required(),
+    pages: Joi.number().required(),
+  }
+)
+
 export const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginSchema.validate(req.body);
   if (error) return res.status(400).json({ message: error.message });
@@ -48,6 +57,13 @@ export const validateReader = (req: Request, res: Response, next: NextFunction) 
 
 export const validateBook = (req: Request, res: Response, next: NextFunction) => {
   const { error } = bookSchema.validate(req.body);
+  if (error) return res.status(400).json({ message: error.message });
+  next();
+};
+
+export const validateUpdateBook = (req: Request, res: Response, next: NextFunction) => {
+  const { isbn, title, year, pages } = req.body;
+  const { error } = updateBookSchema.validate({ isbn, title, year, pages });
   if (error) return res.status(400).json({ message: error.message });
   next();
 };
