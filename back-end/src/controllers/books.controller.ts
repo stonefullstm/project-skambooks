@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import booksService from '../services/books.service';
+import exchangesService from '../services/exchanges.service';
 import statusCodes from '../statusCodes';
 
 const getAllBooks = async (req: Request, res: Response) => {
@@ -12,6 +13,10 @@ const deleteBook = async ( req: Request, res: Response) => {
   const result = await booksService.getBookById(Number(id));
   if (!result) {
     return res.status(statusCodes.NOT_FOUND).json({ message: 'Book not found'});
+  }
+  const exchanges = await exchangesService.getAllExchangesByBook(Number(id));
+  if (exchanges && exchanges.length > 0) {
+    return res.status(statusCodes.BAD_REQUEST).json({ message: 'Book has exchanges'});
   }
   const deletedQty = await booksService.deleteBook(Number(id));
   if (deletedQty) {
