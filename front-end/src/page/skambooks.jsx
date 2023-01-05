@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { requiretBooks } from '../actions/action';
 import { connect } from 'react-redux';
-import { getAllBooks, getReaderById } from '../services/fetchs';
+import { getAllBooks, getReaderById, deleteBook } from '../services/fetchs';
 import '../App.css';
 import './exchanges.css';
 import { Link } from "react-router-dom";
@@ -13,6 +13,8 @@ class skambooks extends Component {
   state = {
     reader: {},
   };
+
+
   async componentDidMount(){
     const token = localStorage.getItem('token');
     const options = {
@@ -33,17 +35,46 @@ class skambooks extends Component {
     });
     const result = requiretBooks(books);
     dispatch(result);
-  }
+  };
+
+  handleExcluir = async (id) => {
+    let r = window.confirm(`Are you sure you want to delete the id ${id}?`);
+    if (r) {
+      const token = localStorage.getItem('token');
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization':`${token}`,
+        },
+      };
+  
+      const { message } = await deleteBook(id, options);
+      alert(message);
+      const { book, dispatch } = this.props;
+      const result = book.filter((item) => item.id !== id);
+      const r = requiretBooks(result);
+      dispatch(r);
+    }
+  };
+
   render() {
     const { reader } = this.state;
     const { book } = this.props;
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
         return ( <div key={ index } className='list'>
-          <li className='li'>{ item.title }</li>
+          <li className='li-exchange'>
+            <li>book: <strong>{ item.title }</strong></li>
+            { item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
+          </li>
+          <div>
+            <li>readers: <strong>{ item.readers.name }</strong></li>
+            <li>year: <strong>{ item.year }</strong></li>
+          </div>
           <div className='div-button'>
           <button type='button' className='button-list'><img src={ editar } alt='images' className='img'/></button>
-          <button type='button' className='button-list'><img src={ excluir } alt='images' className='img'/></button>
+          <button type='button' className='button-list' onClick={ () => this.handleExcluir(item.id)}><img src={ excluir } alt='images' className='img'/></button>
           <button type='button' className='button-list'><img src={ troca } alt='images' className='img'/></button>
           </div>
         </div>)

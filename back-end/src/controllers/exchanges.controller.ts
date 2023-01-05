@@ -66,7 +66,7 @@ const deleteExchange = async ( req: Request, res: Response) => {
   if (result.receiveDate) {
     return res.status(statusCodes.BAD_REQUEST).json({ message: 'Confirmed exchange cannot be deleted'});
   }
-  if (result.receiverId != readerId) {
+  if (result.senderId !== readerId) {
     return res.status(statusCodes.UNAUTHORIZED).json({ message: 'Reader cannot delete exchange' });
   }
   const exchange = await exchangesService.deleteExchange(Number(id));

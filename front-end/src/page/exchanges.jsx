@@ -66,6 +66,7 @@ export default class exchanges extends Component {
 
   render() {
     const { exchange, reader } = this.state;
+    console.log(exchange);
     const list = exchange.map((item, index) => {
       let isDisabled = false;
       if (item.sender.id === reader.id && item.receiveDate === null) {
