@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { createReader, myCep } from '../services/fetchs';
 
-const MIN_LENGTH_INPUT = 6;
+const MIN_LENGTH_INPUT = 8;
 export default class createUser extends Component {
   state = {
     name: '',

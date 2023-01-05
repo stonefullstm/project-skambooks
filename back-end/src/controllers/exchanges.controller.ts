@@ -51,7 +51,7 @@ const confirmExchange = async (req: Request, res: Response) => {
   const updatedQty = await exchangesService.confirmExchange(Number(id));
   if (updatedQty) {
     const result = await exchangesService.getExchangeById(Number(id));
-    return res.status(statusCodes.OK).json(result);
+    return res.status(statusCodes.OK).json({ message: `${result.id}` });
   }
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
 }

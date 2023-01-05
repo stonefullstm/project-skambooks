@@ -2,12 +2,28 @@ import React, { Component } from 'react';
 import '../App.css';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import { getReaderById } from '../services/fetchs';
 
 class searcheBooks extends Component {
   state = {
     filter: '',
     change: '',
+    reader: {},
   };
+  async componentDidMount(){
+    const token = localStorage.getItem('token');
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization':`${token}`,
+      },
+    };
+    const reader = await getReaderById(options);
+    this.setState({
+      reader: reader,
+    });
+  }
   handleChange = ({ target }) => {
     this.setState({
       filter: target.value,
@@ -19,11 +35,13 @@ class searcheBooks extends Component {
     });
   };
   render() {
-    const { filter, change } = this.state;
+    const { filter, change, reader } = this.state;
     const { book } = this.props;
     let list = '';
     if ( filter === 'All') {
-      list = book.map((item, index) => (<div key={ index } className='list'>
+      const result = book.filter((item) => item.readers.id !== reader.id);
+      console.log(result, reader.id);
+      list = result.map((item, index) => (<div key={ index } className='list'>
       <li className='li'>{ item.title }</li>
     </div>));
     };

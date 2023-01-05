@@ -4,7 +4,7 @@ import { login } from '../services/fetchs';
 import { Link } from "react-router-dom";
 /* import { connect } from 'react-redux'; */
 
-const MIN_LENGTH_INPUT = 6;
+const MIN_LENGTH_INPUT = 8;
 class initialPage extends Component {
   state = {
     email: '',
