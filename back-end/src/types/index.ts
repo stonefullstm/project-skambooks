@@ -57,6 +57,11 @@ export type TReader = {
   newReader: boolean;
 };
 
+export type TReaderName = {
+  id: number;
+  name: string;
+}
+
 export type TExchange = {
   id?: number;
   senderId: number;
