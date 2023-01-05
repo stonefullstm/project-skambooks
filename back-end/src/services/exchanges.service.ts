@@ -22,6 +22,15 @@ const getAllExchangesByReader = async (id: number): Promise<TExchange[]> => {
   return exchanges;
 }
 
+const getAllExchangesByBook = async (id: number): Promise<TExchange[]> => {
+  const exchanges = await exchangesModel.findAll({
+    where: {
+        bookId: id
+    },
+  });
+  return exchanges;
+}
+
 const getExchangeById = async (id: number): Promise<TExchange> => {
   const exchange = await exchangesModel.findByPk(id, {
     // include: { model: authorsModel, as: 'authors', through: {attributes: []} }
@@ -74,7 +83,8 @@ const confirmExchange = async (id: number): Promise<number> => {
   });
 }
 
-export default { getAllExchangesByReader, 
+export default { getAllExchangesByReader,
+  getAllExchangesByBook,
   createExchange, 
   deleteExchange, 
   getExchangeById, 
