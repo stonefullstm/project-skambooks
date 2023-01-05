@@ -50,4 +50,8 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
   });
 };
 
+// const updateBook = async (book: TBook) => {
+  
+// }
+
 export default { getAllBooks, deleteBook, getBookById, createBook };

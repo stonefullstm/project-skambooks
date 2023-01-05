@@ -16,6 +16,14 @@ const getReaderById = async ( req: Request, res: Response) => {
   return res.status(statusCodes.NOT_FOUND).json({ message: 'Reader not found'});
 };
 
+const getAllReaders = async (req: Request, res: Response) => {
+  const result = await readersService.getAllReaders();
+  if (!result) {
+    return res.status(statusCodes.NOT_FOUND).json({ message: 'Readers not found'});
+  }
+  return res.status(statusCodes.OK).json(result);
+}
+
 const getReaderByEmail = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const user = await readersService.getReaderByEmail(email);
@@ -80,4 +88,9 @@ const deleteReader = async ( req: Request, res: Response) => {
   
 };
 
-export default { getReaderById, createReader, getReaderByEmail, updateReader, deleteReader };
+export default { getReaderById,
+  getAllReaders, 
+  createReader, 
+  getReaderByEmail, 
+  updateReader, 
+  deleteReader };

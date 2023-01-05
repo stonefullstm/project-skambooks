@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import readersModel from '../database/models/readers.model';
-import { TReader, TUser } from '../types';
+import { TReader, TReaderName, TUser } from '../types';
 
 const getReaderById = async (id: number): Promise<TReader> => {
   const reader = await readersModel.findByPk(id, {
@@ -9,6 +9,24 @@ const getReaderById = async (id: number): Promise<TReader> => {
   return reader as unknown as TReader;
 };
 
+const getAllReaders = async (): Promise<TReaderName> => {
+  const reader = await readersModel.findAll({
+    attributes: {
+    exclude: ['address', 
+    'number', 
+    'complement',
+    'district', 
+    'city',
+    'zipCode',
+    'state',
+    'email',
+    'phone',
+    'password', 
+    'credits', 
+    'newReader']},
+  });
+  return reader as unknown as TReaderName;
+};
 
 const getReaderByEmail = async ( email: string ): Promise<TUser> => {
   const user = await readersModel.findOne({ where: { email } });
@@ -43,4 +61,9 @@ const deleteReader = async (id: number): Promise<number> => {
   return deletedQty;
 };
 
-export default { getReaderById, createReader, getReaderByEmail, updateReader, deleteReader };
+export default { getReaderById,
+  getAllReaders, 
+  createReader, 
+  getReaderByEmail, 
+  updateReader, 
+  deleteReader };
