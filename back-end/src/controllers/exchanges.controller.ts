@@ -31,7 +31,7 @@ const createExchange = async (req: Request, res: Response) => {
     return res.status(statusCodes.BAD_REQUEST).json({ message: 'Reader has no credits' });
   }
   const newExchange = await exchangesService.createExchange({ senderId, receiverId, bookId, sendDate: '', receiveDate: '' });
-  return res.status(statusCodes.CREATED).json(newExchange);
+  return res.status(statusCodes.CREATED).json({ message: 'Create sucess! '});
 }
 
 const confirmExchange = async (req: Request, res: Response) => {

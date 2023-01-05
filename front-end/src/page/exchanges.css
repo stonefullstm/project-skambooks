@@ -20,3 +20,10 @@
   flex-direction: column;
 };
 
+.options {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  background-color: rgb(190, 85, 85);
+}
+

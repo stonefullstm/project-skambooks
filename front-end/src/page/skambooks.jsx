@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { requiretBooks } from '../actions/action';
+import { requiretBooks, requiretReaders } from '../actions/action';
 import { connect } from 'react-redux';
-import { getAllBooks, getReaderById, deleteBook } from '../services/fetchs';
+import { getAllBooks, getReaderById, deleteBook, getReaders, createExchanges } from '../services/fetchs';
 import '../App.css';
 import './exchanges.css';
 import { Link } from "react-router-dom";
@@ -12,6 +12,8 @@ import editar from '../images/editar.png';
 class skambooks extends Component {
   state = {
     reader: {},
+    disabled: false,
+    nome: '',
   };
 
 
@@ -58,9 +60,66 @@ class skambooks extends Component {
     }
   };
 
+  handleReader = async () => {
+    let r = window.confirm('Want to make the switch?');
+    if (r) {
+      const token = localStorage.getItem('token');
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization':`${token}`,
+        },
+      };
+      const { dispatch } = this.props;
+      const { reader } = this.state;
+      const result = await getReaders(options);
+      const readerSqt = result.filter((item) => item.id !== reader.id);
+      if (result) {
+        this.setState({
+          disabled: true,
+        });
+        dispatch(requiretReaders(readerSqt));
+      }
+    }
+  };
+
+  handleSelect = ({target}) => {
+    this.setState({
+      nome: target.value,
+    })
+  };
+
+  handleSender = async (id) => {
+    const { nome } = this.state;
+    const { readers } = this.props;
+    if (nome.length > 0) {
+      const result = readers.filter((i) => i.name.includes(nome));
+      const token = localStorage.getItem('token');
+      const update = {
+        receiverId: result[0].id, 
+        bookId: id, 
+      };
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization':`${token}`,
+        },
+        body: JSON.stringify(update),
+      };
+      const { message } = await createExchanges(options);
+      alert(message);
+      this.setState({
+        disabled: false,
+      })
+    }
+  };
+
   render() {
-    const { reader } = this.state;
-    const { book } = this.props;
+    const { reader, disabled, nome } = this.state;
+    const { book, readers } = this.props;
+    console.log(nome);
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
         return ( <div key={ index } className='list'>
@@ -72,10 +131,19 @@ class skambooks extends Component {
             <li>readers: <strong>{ item.readers.name }</strong></li>
             <li>year: <strong>{ item.year }</strong></li>
           </div>
+
+          { disabled ? <div>
+            <p><strong>Whats user?</strong></p>
+            <select value={ nome } onChange={this.handleSelect }>
+              { readers.map((i) => <option value={i.name}>{ i.name }</option>)}
+            </select>
+            <button type='button' onClick={ () => this.handleSender(item.id) }> Trocar </button>
+          </div> : null }
+
           <div className='div-button'>
           <button type='button' className='button-list'><img src={ editar } alt='images' className='img'/></button>
           <button type='button' className='button-list' onClick={ () => this.handleExcluir(item.id)}><img src={ excluir } alt='images' className='img'/></button>
-          <button type='button' className='button-list'><img src={ troca } alt='images' className='img'/></button>
+          <button type='button' className='button-list' onClick={ this.handleReader }><img src={ troca } alt='images' className='img'/></button>
           </div>
         </div>)
       }
@@ -86,7 +154,9 @@ class skambooks extends Component {
         <h1>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'>My books</h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
           <h1>My books</h1>
-          <ol>{ list }</ol>
+          <ol>
+            { list }
+          </ol>
       </div>
     )
   }
@@ -94,6 +164,7 @@ class skambooks extends Component {
 
 const mapStateToProps = (state) => ({
   book: state.reducerFetch.books,
+  readers: state.reducerFetch.reader,
 });
 
 
