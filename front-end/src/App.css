@@ -123,12 +123,12 @@ body {
 
 .list {
   /* text-align: center; */
-  height: 50px;
+  height: 50%;
   margin-bottom: 10px;
   background-color: cornflowerblue;
   display: flex;
   justify-content: space-between;
-  width: 2000px;
+  width: 98%;
 }
 
 li {
@@ -148,6 +148,7 @@ li {
   margin-right: 20px;
 }
 .button-list {
+  border-radius: 10px;
   cursor: pointer;
   width: 90px;
   background-color: rgb(208, 201, 201);

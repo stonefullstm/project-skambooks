@@ -3,7 +3,11 @@ import { requiretBooks } from '../actions/action';
 import { connect } from 'react-redux';
 import { getAllBooks, getReaderById } from '../services/fetchs';
 import '../App.css';
+import './exchanges.css';
 import { Link } from "react-router-dom";
+import troca from '../images/troca.png';
+import excluir from '../images/excluir.png';
+import editar from '../images/editar.png';
 
 class skambooks extends Component {
   state = {
@@ -33,15 +37,14 @@ class skambooks extends Component {
   render() {
     const { reader } = this.state;
     const { book } = this.props;
-    console.log(book);
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
         return ( <div key={ index } className='list'>
           <li className='li'>{ item.title }</li>
           <div className='div-button'>
-          <button type='button' className='button-list'>E</button>
-          <button type='button' className='button-list'> - </button>
-          <button type='button' className='button-list'>Atualizar</button>
+          <button type='button' className='button-list'><img src={ editar } alt='images' className='img'/></button>
+          <button type='button' className='button-list'><img src={ excluir } alt='images' className='img'/></button>
+          <button type='button' className='button-list'><img src={ troca } alt='images' className='img'/></button>
           </div>
         </div>)
       }
