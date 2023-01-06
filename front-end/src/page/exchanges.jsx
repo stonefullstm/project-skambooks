@@ -17,7 +17,7 @@ export default class exchanges extends Component {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization':`${token}`,
+        'Authorization': `${token}`,
       },
     };
     const result = await getExchanges(options);
@@ -36,15 +36,15 @@ export default class exchanges extends Component {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json',
-          'Authorization':`${token}`,
+          'Authorization': `${token}`,
         },
-    };
-    const { message } = await deleteExchanges(id, options);
-    alert(message);
-    const { exchange } = this.state;
-    this.setState({
-      exchange: exchange.filter((i) => i.id !== id),
-    });
+      };
+      const { message } = await deleteExchanges(id, options);
+      alert(message);
+      const { exchange } = this.state;
+      this.setState({
+        exchange: exchange.filter((i) => i.id !== id),
+      });
     };
   };
 
@@ -56,11 +56,11 @@ export default class exchanges extends Component {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json',
-          'Authorization':`${token}`,
+          'Authorization': `${token}`,
         },
       };
-    const { message } = await confirmeExchanges(id, options);
-    alert(message);
+      const { message } = await confirmeExchanges(id, options);
+      alert(message);
     };
   };
 
@@ -69,39 +69,39 @@ export default class exchanges extends Component {
     const list = exchange.map((item, index) => {
       let isDisabled = false;
       if (item.sender.id === reader.id && item.receiveDate === null) {
-          isDisabled = true;
+        isDisabled = true;
       };
       let disableReceiver = false;
       if (item.receiver.id === reader.id && item.receiveDate === null) {
         disableReceiver = true;
       };
       if (exchange.length > 0) {
-        return (<div key={ index } className='lists'>
-      <li className='li-exchange'>
-        <li>book: <strong>{ item.bookExchanged.title }</strong></li>
-        <li>sender: <strong>{ item.sender.name }</strong></li>
-        <li>received: <strong>{ item.receiver.name }</strong></li>
-      </li>
-      <div>
-        <li>sendDate: <strong>{ item.sendDate }</strong></li>
-        <li>receivedDate: <strong>{ item.receiveDate }</strong></li>
-      </div>
-      <div className='div-button'>
-          { isDisabled ? <button type='button' className='button-list' onClick={ () => this.handleClicDelete(item.id)}><img src={ excluir } alt='images' className='img'/></button> : null }
-          { disableReceiver ? <button type='button' className='button-list' onClick={ () => this.handleClicConfirme(item.id)}><img src={ confirme } alt='images' className='img'/></button> : null }
+        return (<div key={index} className='lists'>
+          <li className='li-exchange'>
+            <li>book: <strong>{item.bookExchanged.title}</strong></li>
+            <li>sender: <strong>{item.sender.name}</strong></li>
+            <li>received: <strong>{item.receiver.name}</strong></li>
+          </li>
+          <div>
+            <li>sendDate: <strong>{item.sendDate}</strong></li>
+            <li>receivedDate: <strong>{item.receiveDate}</strong></li>
           </div>
-      </div>)
+          <div className='div-button'>
+            {isDisabled ? <button type='button' className='button-list' onClick={() => this.handleClicDelete(item.id)}><img src={excluir} alt='images' className='img' /></button> : null}
+            {disableReceiver ? <button type='button' className='button-list' onClick={() => this.handleClicConfirme(item.id)}><img src={confirme} alt='images' className='img' /></button> : null}
+          </div>
+        </div>)
       }
       return null;
     });
 
     return (
       <div><h1>SKAMBOOKS</h1>
-      <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2>My exchanges</h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
+        <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2>My exchanges</h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
         <h1>My exchanges</h1>
         <ol>
-         { list }   
-         </ol>  
+          {list}
+        </ol>
       </div>
     );
   };

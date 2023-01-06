@@ -45,7 +45,7 @@ const updateBook = async (req: Request, res: Response) => {
   }
   const updatedQty = await booksService.updateBook( req.body, Number(id));
   if (updatedQty) {
-    return res.status(statusCodes.OK).json({ id, ...req.body });
+    return res.status(statusCodes.OK).json({ message: `Update book ${id}`});
   }
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
 }

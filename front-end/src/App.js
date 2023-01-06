@@ -5,6 +5,7 @@ import skambooks from './page/skambooks';
 import createUser from './page/createUser';
 import searcheBooks from './page/searcheBooks';
 import exchanges from './page/exchanges';
+import updateBook from './page/updateBook';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route exact path="/create-user" component={ createUser } />
         <Route exact path='/search' component={ searcheBooks } />
         <Route exact path='/exchange' component={ exchanges } />
+        <Route exact path='/update-book' component={ updateBook } />
       </Switch>
     </div>
   );

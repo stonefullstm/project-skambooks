@@ -55,19 +55,19 @@ class initialPage extends Component {
     return (
       <div className='login'>
         <h1 className='title'>User Login</h1>
-       <input type='text' 
-        placeholder='E-mail' 
-        name='email'
-        onChange={ this.handleChange }
-        className='email'/>
-       <input type='text' 
-        placeholder='password' 
-        name='password'
-        onChange={ this.handleChange }
-        className='password'/>
+        <input type='text'
+          placeholder='E-mail'
+          name='email'
+          onChange={this.handleChange}
+          className='email' />
+        <input type='text'
+          placeholder='password'
+          name='password'
+          onChange={this.handleChange}
+          className='password' />
         <Link to='/create-user' className='link'>Create user</Link>
-       <button type='button'
-        className='button' disabled={ buttonIsDisabled } onClick={ this.handClick }>login</button>
+        <button type='button'
+          className='button' disabled={buttonIsDisabled} onClick={this.handClick}>login</button>
       </div>
     )
   }
