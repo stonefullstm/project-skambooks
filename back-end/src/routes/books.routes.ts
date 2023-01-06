@@ -6,6 +6,7 @@ import validateToken from '../middleware/validateToken';
 const routerBooks = Router();
 routerBooks.delete('/books/:id', validateToken, booksController.deleteBook);
 routerBooks.get('/books', validateToken, booksController.getAllBooks);
+routerBooks.get('/books/:id', validateToken, booksController.getBookById);
 routerBooks.post('/books', validateToken, validateBook, booksController.createBook);
 routerBooks.put('/books/:id', validateToken, validateUpdateBook, booksController.updateBook);
 

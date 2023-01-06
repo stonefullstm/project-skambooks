@@ -8,6 +8,15 @@ const getAllBooks = async (req: Request, res: Response) => {
   res.status(statusCodes.OK).json(books);
 };
 
+const getBookById = async ( req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await booksService.getBookById(Number(id));
+  if (result) {
+    return res.status(statusCodes.OK).json(result);
+  }
+  return res.status(statusCodes.NOT_FOUND).json({ message: 'Book not found'});
+};
+
 const deleteBook = async ( req: Request, res: Response) => {
   const { id } = req.params;
   const result = await booksService.getBookById(Number(id));
@@ -52,6 +61,7 @@ const updateBook = async (req: Request, res: Response) => {
 
 export default {
   getAllBooks,
+  getBookById,
   deleteBook,
   createBook,
   updateBook,
