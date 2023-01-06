@@ -15,7 +15,7 @@ module.exports = {
         phone: '93991000000',
         email: 'jotac@test.com',
         password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
-        // credits: 0,
+        credits: 1,
       },
       {
         name: 'José Antônio',
@@ -29,7 +29,7 @@ module.exports = {
         phone: '93991000001',
         email: 'jotaantonio@test.com',
         password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
-        // credits: 0,
+        credits: 1,
       },
       {
         name: 'João Almeida',
@@ -43,7 +43,7 @@ module.exports = {
         phone: '93991001111',
         email: 'jalmeida@test.com',
         password: '$2b$10$6Ab5QDY1hqU2VbUK6Zg.yerYtTyk40JMqlMacLskerSYG9.wARKTO',
-        // credits: 0
+        credits: 1,
       }
       
     ], {}),
