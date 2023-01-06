@@ -11,13 +11,13 @@ class searcheBooks extends Component {
     change: '',
     reader: {},
   };
-  async componentDidMount(){
+  async componentDidMount() {
     const token = localStorage.getItem('token');
     const options = {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization':`${token}`,
+        'Authorization': `${token}`,
       },
     };
     const reader = await getReaderById(options);
@@ -39,35 +39,35 @@ class searcheBooks extends Component {
     const { filter, change, reader } = this.state;
     const { book } = this.props;
     let list = '';
-    if ( filter === 'All') {
+    if (filter === 'All') {
       const result = book.filter((item) => item.readers.id !== reader.id);
       console.log(result, reader.id);
-      list = result.map((item, index) => (<div key={ index } className='lists'>
-      <li className='li-filter'>
-        <li>book: <strong>{ item.title }</strong></li>
-        <li>year: <strong>{ item.year }</strong></li>
-        { item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
-        <li>readers: <strong>{ item.readers.name }</strong></li>
-      </li>
-    </div>));
+      list = result.map((item, index) => (<div key={index} className='lists'>
+        <li className='li-filter'>
+          <li>book: <strong>{item.title}</strong></li>
+          <li>year: <strong>{item.year}</strong></li>
+          {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
+          <li>readers: <strong>{item.readers.name}</strong></li>
+        </li>
+      </div>));
     };
-    
+
     if (filter === 'Title' && change.length > 0) {
       const result = book.filter((item) => item.readers.id !== reader.id);
       const result1 = result.filter((i) => i.title.includes(change));
-     list = result1.map((item, index) => {
+      list = result1.map((item, index) => {
         if (result1.length > 0) {
-          return ( <di key={ index } className='list'>
+          return (<di key={index} className='list'>
             <li className='li-filter'>
-            <li>book: <strong>{ item.title }</strong></li>
-            <li>year: <strong>{ item.year }</strong></li>
-              { item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
-              <li>readers: <strong>{ item.readers.name }</strong></li>
+              <li>book: <strong>{item.title}</strong></li>
+              <li>year: <strong>{item.year}</strong></li>
+              {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
+              <li>readers: <strong>{item.readers.name}</strong></li>
             </li>
           </di>)
         }
         return null;
-    });
+      });
     };
 
     if (filter === 'Author' && change.length > 0) {
@@ -90,23 +90,23 @@ class searcheBooks extends Component {
              </li>
            </di>)
          } */
-         return null;
-     });
-     };
+        return null;
+      });
+    };
     return (
       <div>
         <h1>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'>Search books</h2></header>
-          <h1>Search books</h1>
-        <div onChange={ this.handleChange } className='filtered'>
-        <input type="radio" value="All" name="gender"/> <h2>All</h2>
-        <input type="radio" value="Title" name="gender"/> <h2>Title</h2>
-        <input type="radio" value="Author" name="gender"/> <h2>Author</h2>
+        <h1>Search books</h1>
+        <div onChange={this.handleChange} className='filtered'>
+          <input type="radio" value="All" name="gender" /> <h2>All</h2>
+          <input type="radio" value="Title" name="gender" /> <h2>Title</h2>
+          <input type="radio" value="Author" name="gender" /> <h2>Author</h2>
         </div>
-        { filter === 'Author' || filter === 'Title' ? <input type='text' className='email' onChange={ this.change } placeholder='search'/> : null }
-         <ol>
-         { list }   
-         </ol>  
+        {filter === 'Author' || filter === 'Title' ? <input type='text' className='email' onChange={this.change} placeholder='search' /> : null}
+        <ol>
+          {list}
+        </ol>
       </div>
     )
   }

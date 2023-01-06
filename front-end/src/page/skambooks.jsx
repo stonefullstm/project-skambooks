@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { requiretBooks, requiretReaders } from '../actions/action';
+import { requiretBooks, requiretReaders, updateBook } from '../actions/action';
 import { connect } from 'react-redux';
 import { getAllBooks, getReaderById, deleteBook, getReaders, createExchanges } from '../services/fetchs';
 import '../App.css';
@@ -17,13 +17,13 @@ class skambooks extends Component {
   };
 
 
-  async componentDidMount(){
+  async componentDidMount() {
     const token = localStorage.getItem('token');
     const options = {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
-        'Authorization':`${token}`,
+        'Authorization': `${token}`,
       },
     };
     const { dispatch, history } = this.props;
@@ -47,10 +47,10 @@ class skambooks extends Component {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json',
-          'Authorization':`${token}`,
+          'Authorization': `${token}`,
         },
       };
-  
+
       const { message } = await deleteBook(id, options);
       alert(message);
       const { book, dispatch } = this.props;
@@ -68,7 +68,7 @@ class skambooks extends Component {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          'Authorization':`${token}`,
+          'Authorization': `${token}`,
         },
       };
       const { dispatch } = this.props;
@@ -84,7 +84,7 @@ class skambooks extends Component {
     }
   };
 
-  handleSelect = ({target}) => {
+  handleSelect = ({ target }) => {
     this.setState({
       nome: target.value,
     })
@@ -97,14 +97,14 @@ class skambooks extends Component {
       const result = readers.filter((i) => i.name.includes(nome));
       const token = localStorage.getItem('token');
       const update = {
-        receiverId: result[0].id, 
-        bookId: id, 
+        receiverId: result[0].id,
+        bookId: id,
       };
       const options = {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-          'Authorization':`${token}`,
+          'Authorization': `${token}`,
         },
         body: JSON.stringify(update),
       };
@@ -116,47 +116,53 @@ class skambooks extends Component {
     }
   };
 
+  handleUpdate = (id) => {
+    const { dispatch, history } = this.props;
+    dispatch(updateBook(id));
+    history.push('/update-book');
+  };
+
   render() {
     const { reader, disabled, nome } = this.state;
     const { book, readers } = this.props;
     console.log(nome);
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
-        return ( <div key={ index } className='list'>
+        return (<div key={index} className='list'>
           <li className='li-exchange'>
-            <li>book: <strong>{ item.title }</strong></li>
-            { item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
+            <li>book: <strong>{item.title}</strong></li>
+            {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
           </li>
           <div>
-            <li>readers: <strong>{ item.readers.name }</strong></li>
-            <li>year: <strong>{ item.year }</strong></li>
+            <li>readers: <strong>{item.readers.name}</strong></li>
+            <li>year: <strong>{item.year}</strong></li>
           </div>
 
-          { disabled ? <div>
+          {disabled ? <div>
             <p><strong>Whats user?</strong></p>
-            <select value={ nome } onChange={this.handleSelect }>
-              { readers.map((i) => <option value={i.name}>{ i.name }</option>)}
+            <select value={nome} onChange={this.handleSelect}>
+              {readers.map((i) => <option value={i.name}>{i.name}</option>)}
             </select>
-            <button type='button' onClick={ () => this.handleSender(item.id) }> Trocar </button>
-          </div> : null }
+            <button type='button' onClick={() => this.handleSender(item.id)}> Trocar </button>
+          </div> : null}
 
           <div className='div-button'>
-          <button type='button' className='button-list'><img src={ editar } alt='images' className='img'/></button>
-          <button type='button' className='button-list' onClick={ () => this.handleExcluir(item.id)}><img src={ excluir } alt='images' className='img'/></button>
-          <button type='button' className='button-list' onClick={ this.handleReader }><img src={ troca } alt='images' className='img'/></button>
+            <button type='button' className='button-list' onClick={() => this.handleUpdate(item.id)}><img src={editar} alt='images' className='img' /></button>
+            <button type='button' className='button-list' onClick={() => this.handleExcluir(item.id)}><img src={excluir} alt='images' className='img' /></button>
+            <button type='button' className='button-list' onClick={this.handleReader}><img src={troca} alt='images' className='img' /></button>
           </div>
         </div>)
       }
       return null;
-  });
+    });
     return (
       <div>
         <h1>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'>My books</h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
-          <h1>My books</h1>
-          <ol>
-            { list }
-          </ol>
+        <h1>My books</h1>
+        <ol>
+          {list}
+        </ol>
       </div>
     )
   }
