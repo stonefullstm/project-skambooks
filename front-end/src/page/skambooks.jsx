@@ -52,11 +52,15 @@ class skambooks extends Component {
       };
 
       const { message } = await deleteBook(id, options);
+      if (message === `Books deleted: ${id}`) {
+        alert(message);
+        const { book, dispatch } = this.props;
+        const result = book.filter((item) => item.id !== id);
+        const r = requiretBooks(result);
+        dispatch(r);
+      }
       alert(message);
-      const { book, dispatch } = this.props;
-      const result = book.filter((item) => item.id !== id);
-      const r = requiretBooks(result);
-      dispatch(r);
+
     }
   };
 

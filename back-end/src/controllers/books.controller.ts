@@ -29,7 +29,7 @@ const deleteBook = async ( req: Request, res: Response) => {
   }
   const deletedQty = await booksService.deleteBook(Number(id));
   if (deletedQty) {
-    return res.status(statusCodes.OK).json({ message: `Books deleted: ${deletedQty}`});
+    return res.status(statusCodes.OK).json({ message: `Books deleted: ${id}`});
   };
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
   
