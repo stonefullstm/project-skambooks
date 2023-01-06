@@ -34,6 +34,12 @@ export const getReaderById = async (options) => {
   return result;
 };
 
+export const getBookById = async (id, options) => {
+  const response = await fetch(`http://localhost:3000/books/${id}`, options);
+  const result = await response.json();
+  return result;
+}
+
 export const getExchanges = async (options) => {
   const response = await fetch(url3, options);
   const result = await response.json();

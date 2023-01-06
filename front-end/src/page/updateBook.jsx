@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import { updateBooks } from '../services/fetchs';
+import { getBookById, updateBooks } from '../services/fetchs';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
@@ -13,6 +13,27 @@ class updateBook extends Component {
     pages: '',
     buttonIsDisabled: true,
   }
+
+  async componentDidMount() {
+    const { update } = this.props;
+    const token = localStorage.getItem('token');
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `${token}`,
+      },
+    };
+    const book = await getBookById(update, options);
+    console.log(book.isbn);
+    this.setState({
+      isbn: book.isbn,
+      title: book.title,
+      year: book.year,
+      pages: book.pages,
+    });
+  } 
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -57,15 +78,15 @@ class updateBook extends Component {
   };
 
   render() {
-    const { buttonIsDisabled } = this.state;
+    const { isbn, title, year, pages, buttonIsDisabled } = this.state;
     return (
       <div className='create-user'>
-        <h1>Update new book</h1>
+        <h1>Update book</h1>
         <form className='form'>
-          <input type="text" name='isbn' onChange={this.handleChange} className='email' placeholder='isbn' />
-          <input type="text" name='title' onChange={this.handleChange} className='email' placeholder='title' />
-          <input type="text" name='year' onChange={this.handleChange} className='email' placeholder='year' />
-          <input type="text" name='pages' onChange={this.handleChange} className='email' placeholder='pages' />
+          <input type="text" name='isbn' value={isbn} onChange={this.handleChange} className='email' placeholder='isbn' />
+          <input type="text" name='title' value={title} onChange={this.handleChange} className='email' placeholder='title' />
+          <input type="text" name='year' value={year} onChange={this.handleChange} className='email' placeholder='year' />
+          <input type="text" name='pages' value={pages} onChange={this.handleChange} className='email' placeholder='pages' />
           <div className='div-form'>
             <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
             <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
