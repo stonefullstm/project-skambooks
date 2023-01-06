@@ -22,7 +22,11 @@ module.exports = {
       {
         book_id: 3,
         author_id: 5,
-      }
+      },
+      {
+        book_id: 4,
+        author_id: 6,
+      },
     ], {}),
 
   down: async (queryInterface) => queryInterface.bulkDelete('authors_books', null, {}),

@@ -17,6 +17,9 @@ module.exports = {
       },
       {
         name: 'Danny Penman',
+      },
+      {
+        name: 'Robert G. Hagstrom',
       }
     ], {}),
 

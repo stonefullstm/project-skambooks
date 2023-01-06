@@ -23,6 +23,13 @@ module.exports = {
         year: '2015',
         pages: 207,
         reader_id: 1,
+      },
+      {
+        isbn: '9788557173064',
+        title: 'O jeito Warren Buffet de investir',
+        year: '2019',
+        pages: 295,
+        reader_id: 1,
       }
     ], {}),
 

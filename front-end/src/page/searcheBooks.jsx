@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
-import './exchanges.css';
-import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+import '../App.css';
 import { getReaderById } from '../services/fetchs';
+import './exchanges.css';
 
 class searcheBooks extends Component {
   state = {
@@ -41,8 +41,7 @@ class searcheBooks extends Component {
     let list = '';
     if (filter === 'All') {
       const result = book.filter((item) => item.readers.id !== reader.id);
-      console.log(result, reader.id);
-      list = result.map((item, index) => (<div key={index} className='lists'>
+      list = result.map((item, index) => (<div key={index} className='list'>
         <li className='li-filter'>
           <li>book: <strong>{item.title}</strong></li>
           <li>year: <strong>{item.year}</strong></li>
@@ -57,14 +56,14 @@ class searcheBooks extends Component {
       const result1 = result.filter((i) => i.title.includes(change));
       list = result1.map((item, index) => {
         if (result1.length > 0) {
-          return (<di key={index} className='list'>
+          return (<div key={index} className='list'>
             <li className='li-filter'>
               <li>book: <strong>{item.title}</strong></li>
               <li>year: <strong>{item.year}</strong></li>
               {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
               <li>readers: <strong>{item.readers.name}</strong></li>
             </li>
-          </di>)
+          </div>)
         }
         return null;
       });
@@ -72,24 +71,19 @@ class searcheBooks extends Component {
 
     if (filter === 'Author' && change.length > 0) {
       const result = book.filter((item) => item.readers.id !== reader.id);
-      const r = result.map((item) => {
-        /* const n = item.authors.filter((i) => i.name.includes(change))
-        console.log('r',n); */
-        if (item.authors.filter((i) => i.name.includes(change))) {
-          return item.title;
-        }
-        return null;
-      });
-      console.log(r);
-      list = r.map((item, index) => {
-        console.log(item, index);
-        /*  if (item.length > 0) {
-           return ( <di key={ index } className='list'>
-             <li className='li-filter'>
-             <li>author: <strong>{item}</strong></li>
-             </li>
-           </di>)
-         } */
+      const result2 = result.filter((item) => item
+        .authors.some((author) => author.name.includes(change)));
+      list = result2.map((item, index) => {
+        if (result2.length > 0) {
+           return ( <div key={ index } className='list'>
+            <li className='li-filter'>
+              <li>book: <strong>{item.title}</strong></li>
+              <li>year: <strong>{item.year}</strong></li>
+              {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
+              <li>readers: <strong>{item.readers.name}</strong></li>
+            </li>
+           </div>)
+         }
         return null;
       });
     };
