@@ -73,7 +73,9 @@ export default class createUser extends Component {
     const result = await createReader(options);
     if (result) {
       alert('Usuário criado com sucesso!');
-    }
+    };
+    const { history } = this.props;
+    history.push('/skambooks');
   };
   render() {
     const { buttonIsDisabled, address, district, city, state } = this.state;
