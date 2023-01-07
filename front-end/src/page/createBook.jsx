@@ -80,7 +80,8 @@ export default class createBook extends Component {
 
   render() {
 
-    const { buttonIsDisabled, title, year, pages } = this.state;
+    const { buttonIsDisabled, title, year, pages, isbn, authors } = this.state;
+    console.log(title, year, pages, isbn, authors );
     return (
       <div className='create-user'>
         <h1>Create book</h1>
