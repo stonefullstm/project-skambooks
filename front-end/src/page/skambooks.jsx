@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import troca from '../images/troca.png';
 import excluir from '../images/excluir.png';
 import editar from '../images/editar.png';
+import mais from '../images/mais.png';
 
 class skambooks extends Component {
   state = {
@@ -53,7 +54,6 @@ class skambooks extends Component {
 
       const { message } = await deleteBook(id, options);
       if (message === `Books deleted: ${id}`) {
-        alert(message);
         const { book, dispatch } = this.props;
         const result = book.filter((item) => item.id !== id);
         const r = requiretBooks(result);
@@ -126,6 +126,11 @@ class skambooks extends Component {
     history.push('/update-book');
   };
 
+  handleMais = () => {
+    const { history } = this.props;
+    history.push('/create-book');
+  };
+
   render() {
     const { reader, disabled, nome } = this.state;
     const { book, readers } = this.props;
@@ -164,6 +169,8 @@ class skambooks extends Component {
         <h1>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'>My books</h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
         <h1>My books</h1>
+        <button type='button'
+          className='button-mais' onClick={ this.handleMais }><img src={mais} alt="Images" className='mais' /></button>
         <ol>
           {list}
         </ol>

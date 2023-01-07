@@ -12,6 +12,23 @@
   width: 50px;
   height: 30px;
 }
+.mais {
+  width: 50px;
+  height: 30px;
+  margin-top: 4px;
+}
+
+.button-mais {
+  border-radius: 10px;
+  cursor: pointer;
+  width: 90px;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  font-size: larger;
+  margin-left: 90%;
+}
 
 .li-filter {
   margin:auto;

@@ -6,6 +6,7 @@ import createUser from './page/createUser';
 import searcheBooks from './page/searcheBooks';
 import exchanges from './page/exchanges';
 import updateBook from './page/updateBook';
+import createBook from './page/createBook';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/search' component={ searcheBooks } />
         <Route exact path='/exchange' component={ exchanges } />
         <Route exact path='/update-book' component={ updateBook } />
+        <Route exact path='/create-book' component={ createBook } />
       </Switch>
     </div>
   );

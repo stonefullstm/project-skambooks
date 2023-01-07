@@ -29,7 +29,7 @@ const bookSchema = Joi.object(
     title: Joi.string().required(),
     year: Joi.string().length(4).required(),
     pages: Joi.number().required(),
-    readerId: Joi.number().required(),
+    /* readerId: Joi.number().required(), */
     authors: Joi.array().required(),
   }
 )
