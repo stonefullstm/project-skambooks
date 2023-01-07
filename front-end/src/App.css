@@ -1,5 +1,5 @@
 body {
-  background-color: aquamarine;
+  background-color: rgb(111, 113, 112);
 }
 .App {
   display: flex;
@@ -157,7 +157,6 @@ li {
   outline: 0;
   font-size: larger;
 }
-
 .Link {
   text-decoration:none;
 }

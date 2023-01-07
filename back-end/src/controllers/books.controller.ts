@@ -39,7 +39,7 @@ const createBook = async (req: Request, res: Response) => {
   const { isbn, title, year, pages, authors} = req.body;
   const { id: readerId } = req.body.user;
   const newBook = await booksService.createBook({isbn, title, year, pages, readerId, authors});
-  return res.status(statusCodes.CREATED).json(newBook);
+  return res.status(statusCodes.CREATED).json({ message: `Create book: ${newBook}`});
 };
   
 const updateBook = async (req: Request, res: Response) => {
