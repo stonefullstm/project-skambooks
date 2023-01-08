@@ -11,6 +11,7 @@ class Book extends Model {
   declare year: string;
   declare pages: number;
   declare readerId: number;
+  declare coverUrl: string;
   declare authors?: Author[];
 }
 
@@ -42,6 +43,12 @@ Book.init({
     type: INTEGER,
     field: 'reader_id',
   },
+  coverUrl: {
+    allowNull: false,
+    type: STRING,
+    field: 'cover_url',
+    defaultValue: '../images/troca.png',
+  }
 }, 
 {
   // ... Outras configs

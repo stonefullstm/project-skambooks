@@ -29,10 +29,10 @@ const deleteBook = async (id: number): Promise<number> => {
 };
 
 const createBook = async (book: TBook): Promise<TNewBook> => {
-  const { isbn, title, year, pages, readerId, authors } = book;
+  const { isbn, title, year, pages, readerId, coverUrl, authors } = book;
   return sequelize.transaction(async (t: Transaction) => {
     const newBook = await booksModel.create({
-      isbn, title, year, pages, readerId, authors,
+      isbn, title, year, pages, readerId, coverUrl, authors,
     }, { include: [{model: Author, as: 'authors'}]},
     );
     const reader = await readersModel.findByPk(readerId, {
@@ -51,9 +51,9 @@ const createBook = async (book: TBook): Promise<TNewBook> => {
 };
 
 const updateBook = async (book: TBook, id: number): Promise<number> => {
-  const { isbn, title, year, pages } = book;
+  const { isbn, title, year, pages, coverUrl } = book;
   const [updatedQty] = await booksModel.update({
-    isbn, title, year, pages},
+    isbn, title, year, pages, coverUrl},
     { where: { id }},
   );
   return updatedQty;
