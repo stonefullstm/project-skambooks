@@ -36,9 +36,9 @@ const deleteBook = async ( req: Request, res: Response) => {
 };
 
 const createBook = async (req: Request, res: Response) => {
-  const { isbn, title, year, pages, authors} = req.body;
+  const { isbn, title, year, pages, coverUrl, authors} = req.body;
   const { id: readerId } = req.body.user;
-  const newBook = await booksService.createBook({isbn, title, year, pages, readerId, authors});
+  const newBook = await booksService.createBook({isbn, title, year, pages, readerId, coverUrl, authors});
   return res.status(statusCodes.CREATED).json({ message: `Create book: ${newBook}`});
 };
   

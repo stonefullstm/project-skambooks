@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
-import './exchanges.css';
-import { getBookIsbn, createBooks } from '../services/fetchs';
 import { connect } from 'react-redux';
+import '../App.css';
+import { createBooks, getBookIsbn } from '../services/fetchs';
+import './exchanges.css';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
@@ -43,8 +43,6 @@ class createBook extends Component {
           pages: result[0].volumeInfo.pageCount,
           authors: author,
         });
-      } else {
-        alert('ISBN do not exist!')
       }
 
     });
@@ -89,9 +87,9 @@ class createBook extends Component {
         <h1>Create book</h1>
         <form className='form'>
           <input type="text" name='isbn' onChange={this.handleChange} className='email' placeholder='isbn' />
-          <input type="text" name='title' value={title} disabled className='email' placeholder='title' />
-          <input type="text" name='year' value={year} disabled className='email' placeholder='year' />
-          <input type="text" name='pages' value={pages} disabled className='email' placeholder='pages' />
+          <input type="text" name='title' onChange={this.handleChange} value={title} className='email' placeholder='title' />
+          <input type="text" name='year' onChange={this.handleChange} value={year} className='email' placeholder='year' />
+          <input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
           <div className='div-form'>
             <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
             <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>

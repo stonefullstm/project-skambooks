@@ -29,7 +29,8 @@ const bookSchema = Joi.object(
     title: Joi.string().required(),
     year: Joi.string().length(4).required(),
     pages: Joi.number().required(),
-    readerId: Joi.number().required(),
+    // readerId: Joi.number().required(),
+    coverUrl: Joi.string(),
     authors: Joi.array().required(),
   }
 )
@@ -40,6 +41,7 @@ const updateBookSchema = Joi.object(
     title: Joi.string().required(),
     year: Joi.string().length(4).required(),
     pages: Joi.number().required(),
+    coverUrl: Joi.string(),
   }
 )
 
@@ -56,14 +58,15 @@ export const validateReader = (req: Request, res: Response, next: NextFunction) 
 };
 
 export const validateBook = (req: Request, res: Response, next: NextFunction) => {
-  const { error } = bookSchema.validate(req.body);
+  const { isbn, title, year, pages, coverUrl, authors } = req.body;
+  const { error } = bookSchema.validate({ isbn, title, year, pages, coverUrl, authors });
   if (error) return res.status(400).json({ message: error.message });
   next();
 };
 
 export const validateUpdateBook = (req: Request, res: Response, next: NextFunction) => {
-  const { isbn, title, year, pages } = req.body;
-  const { error } = updateBookSchema.validate({ isbn, title, year, pages });
+  const { isbn, title, year, pages, coverUrl } = req.body;
+  const { error } = updateBookSchema.validate({ isbn, title, year, pages, coverUrl });
   if (error) return res.status(400).json({ message: error.message });
   next();
 };

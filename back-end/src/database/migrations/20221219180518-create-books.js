@@ -35,6 +35,12 @@ module.exports = {
         },
         field: 'reader_id',
       },
+      coverUrl: {
+        allowNull: false,
+        type: Sequelize.STRING(255),
+        field: 'cover_url',
+        defaultValue: '../images/coverbook.jpg',
+      }
     });
   },
   down: async (queryInterface) => {

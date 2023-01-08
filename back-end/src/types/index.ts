@@ -1,4 +1,3 @@
-
 export type TBook = {
   id?: number;
   isbn: string;
@@ -6,6 +5,7 @@ export type TBook = {
   year: string;
   pages: number;
   readerId: number;
+  coverUrl: string;
   authors: TAuthor[];
 };
 
@@ -16,6 +16,7 @@ export type TNewBook = {
   year: string;
   pages: number;
   readerId: number;
+  coverUrl: string;
   authors: TAuthor[];
 };
 
