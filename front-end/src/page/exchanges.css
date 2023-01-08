@@ -43,4 +43,9 @@
   text-align: center;
   background-color: rgb(190, 85, 85);
 }
+.logout {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 10%;
+}
 

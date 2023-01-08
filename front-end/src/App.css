@@ -111,7 +111,8 @@ body {
   display: flex;
   background-color: darkgray;
   justify-content: space-between;
-  height: 100px;
+  flex-wrap: wrap;
+  height: 100%;
 }
 
 .book {
