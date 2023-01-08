@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { requiretBooks, requiretReaders, updateBook } from '../actions/action';
+import { requiretBooks, requiretReaders, updateBook, idReader } from '../actions/action';
 import { connect } from 'react-redux';
 import { getAllBooks, getReaderById, deleteBook, getReaders, createExchanges } from '../services/fetchs';
 import '../App.css';
@@ -36,6 +36,7 @@ class skambooks extends Component {
     this.setState({
       reader: reader,
     });
+    dispatch(idReader(reader.id));
     const result = requiretBooks(books);
     dispatch(result);
   };
@@ -167,7 +168,12 @@ class skambooks extends Component {
     return (
       <div>
         <h1>SKAMBOOKS</h1>
-        <header className='header'><h2 className='book'>My books</h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
+        <header className='header'>
+          <h2 className='book'>My books</h2>
+          <h2><Link to='/exchange' className='Link'>My exchanges</Link></h2>
+          <h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2>
+          <h2 className='logout'><Link to='/' className='Link'>Logout</Link></h2>
+        </header>
         <h1>My books</h1>
         <button type='button'
           className='button-mais' onClick={ this.handleMais }><img src={mais} alt="Images" className='mais' /></button>

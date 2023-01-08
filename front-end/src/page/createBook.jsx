@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import '../App.css';
 import './exchanges.css';
 import { getBookIsbn, createBooks } from '../services/fetchs';
+import { connect } from 'react-redux';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
 
-export default class createBook extends Component {
+class createBook extends Component {
   state = {
     isbn: '',
     title: '',
@@ -52,13 +53,14 @@ export default class createBook extends Component {
   handleSubmit = async () => {
     const { isbn, title, year, pages, authors } = this.state;
     const token = localStorage.getItem('token');
-    const { history } = this.props;
+    const { history, idReader } = this.props;
     const updated= {
       isbn: isbn,
       title: title,
       year: year,
       pages: pages,
       authors: authors,
+      readerId: idReader,
     }
     const options = {
       method: 'POST',
@@ -98,4 +100,10 @@ export default class createBook extends Component {
       </div>
     )
   }
-}
+};
+
+const mapStateToProps = (state) => ({
+  idReader: state.reducerFetch.idReader,
+});
+
+export default connect(mapStateToProps)(createBook);
