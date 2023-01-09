@@ -21,9 +21,12 @@ class createBook extends Component {
   handleChange = (event) => {
     const { name, value } = event.target;
     if (name === 'authors') {
-      let author = [{ name: value}];
+      const authors = value.split(',');
+      const authorArray = authors.map((author) => {
+        return { name: author };
+      });
       this.setState({
-        authors: author,
+        authors: authorArray,
       })
     } else {
       this.setState({
@@ -31,7 +34,14 @@ class createBook extends Component {
       }, async () => {
         const { isbn } = this.state;
         const result = await getBookIsbn(isbn);
-          const page = result[0].volumeInfo.publishedDate;
+        if (result) {
+          const year = (result[0].volumeInfo.publishedDate) 
+            ? result[0].volumeInfo.publishedDate.slice(0, 4) : '';
+          const isDisabled = isbn.length < MIN_ISBN || year.length < MIN_YEAR;
+
+          const thumbnail = (result[0].volumeInfo.imageLinks) 
+            ? result[0].volumeInfo.imageLinks.thumbnail
+            : 'coverbook';
           const { authors } = this.state;
           let a = result[0].volumeInfo.authors;
           let author = [];
@@ -43,12 +53,20 @@ class createBook extends Component {
           }
           this.setState({
             title: result[0].volumeInfo.title,
-            year: page.slice(0, 4),
+            year,
             pages: result[0].volumeInfo.pageCount,
             authors: author,
-            coverUrl: result[0].volumeInfo.imageLinks.thumbnail,
+            coverUrl: thumbnail,
+            buttonIsDisabled: isDisabled,
           });
-  
+        } else {
+          const { isbn, year } = this.state;
+          const isDisabled = isbn.length < MIN_ISBN || year.length < MIN_YEAR;
+          this.setState({
+            coverUrl: 'coverbook',
+            buttonIsDisabled: isDisabled,
+          })
+        }
       });
     }
     
@@ -68,6 +86,7 @@ class createBook extends Component {
       coverUrl: coverUrl,
       readerId: idReader,
     }
+    console.log(updated.coverUrl);
     const options = {
       method: 'POST',
       headers: {
@@ -88,7 +107,7 @@ class createBook extends Component {
 
   render() {
 
-    const { /* buttonIsDisabled, */ title, year, pages, authors } = this.state;
+    const { buttonIsDisabled, title, year, pages, coverUrl, authors } = this.state;
     /* console.log(title, year, pages, isbn, coverUrl ); */
     console.log(authors);
     return (
@@ -100,8 +119,9 @@ class createBook extends Component {
           <input type="text" name='year' onChange={this.handleChange} value={year} className='email' placeholder='year' />
           <input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
           <input type="text" name='authors' onChange={this.handleChange} value={authors.map((i) => i.name)} className='email' placeholder='authors' />
+          <input type="text" name='coverUrl' onChange={this.handleChange} value={coverUrl} className='email' placeholder='cover URL' />
           <div className='div-form'>
-            <button type="button" /* disabled={buttonIsDisabled} */ onClick={this.handleSubmit} className='submit'>Salvar</button>
+            <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
             <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
           </div>
         </form>
