@@ -152,7 +152,7 @@ class skambooks extends Component {
             <li>year: <strong>{item.year}</strong></li>
           </div>
           <div>
-            <img src={item.coverUrl} className='img' alt='CoverUrl'/>
+            <img src={item.coverUrl} className='img1' alt='CoverUrl'/>
           </div>
           {disabled && item.id === id ? <div>
             <p><strong>Whats user?</strong></p>
