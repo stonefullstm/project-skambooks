@@ -47,7 +47,7 @@ class createBook extends Component {
   };
 
   handleSubmit = async () => {
-    const { isbn, title, year, pages, authors } = this.state;
+    const { isbn, title, year, pages, authors, coverUrl } = this.state;
     console.log(authors);
     const token = localStorage.getItem('token');
     const { history, idReader } = this.props;
@@ -57,6 +57,7 @@ class createBook extends Component {
       year: year,
       pages: pages,
       authors: authors,
+      coverUrl: coverUrl,
       readerId: idReader,
     }
     const options = {
