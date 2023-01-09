@@ -143,6 +143,9 @@ class skambooks extends Component {
       console.log('cover',item.coverUrl);
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
+          <div className='coverbook'>
+            { item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl'/> : <img src={coverbook} className='img1' alt='CoverUrl'/>}
+          </div>
           <li className='li-exchange'>
             <li>book: <strong>{item.title}</strong></li>
             {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
@@ -150,9 +153,6 @@ class skambooks extends Component {
           <div>
             <li>readers: <strong>{item.readers.name}</strong></li>
             <li>year: <strong>{item.year}</strong></li>
-          </div>
-          <div>
-            { item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl'/> : <img src={coverbook} className='img1' alt='CoverUrl'/>}
           </div>
           {disabled && item.id === id ? <div>
             <p><strong>Whats user?</strong></p>

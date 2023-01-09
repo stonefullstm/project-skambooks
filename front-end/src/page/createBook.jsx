@@ -20,32 +20,38 @@ class createBook extends Component {
 
   handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    }, async () => {
-      const { isbn } = this.state;
-      const result = await getBookIsbn(isbn);
-      /* console.log(result[0].volumeInfo.imageLinks.thumbnail); */
-      if (result !== undefined) {
-        // let page = '';
-        const page = result[0].volumeInfo.publishedDate;
-        const isDisabled = isbn.length < MIN_ISBN || page.slice(0, 4).length < MIN_YEAR;
-        // let page = '';
-        // page = result[0].volumeInfo.publishedDate;
-        let a = result[0].volumeInfo.authors;
-        let author = [];
-        a.forEach((item) => author.push({name: item}));
-        this.setState({
-          buttonIsDisabled: isDisabled,
-          title: result[0].volumeInfo.title,
-          year: page.slice(0, 4),
-          pages: result[0].volumeInfo.pageCount,
-          authors: author,
-          coverUrl: result[0].volumeInfo.imageLinks.thumbnail,
-        });
-      }
-
-    });
+    if (name === 'authors') {
+      let author = [{ name: value}];
+      this.setState({
+        authors: author,
+      })
+    } else {
+      this.setState({
+        [name]: value,
+      }, async () => {
+        const { isbn } = this.state;
+        const result = await getBookIsbn(isbn);
+          const page = result[0].volumeInfo.publishedDate;
+          const { authors } = this.state;
+          let a = result[0].volumeInfo.authors;
+          let author = [];
+          if (!a) {
+            let b = [authors];
+            b.forEach((item) => author.push({name: item}));
+          } else {
+            a.forEach((item) => author.push({name: item}));
+          }
+          this.setState({
+            title: result[0].volumeInfo.title,
+            year: page.slice(0, 4),
+            pages: result[0].volumeInfo.pageCount,
+            authors: author,
+            coverUrl: result[0].volumeInfo.imageLinks.thumbnail,
+          });
+  
+      });
+    }
+    
   };
 
   handleSubmit = async () => {
@@ -82,8 +88,9 @@ class createBook extends Component {
 
   render() {
 
-    const { buttonIsDisabled, title, year, pages, authors } = this.state;
+    const { /* buttonIsDisabled, */ title, year, pages, authors } = this.state;
     /* console.log(title, year, pages, isbn, coverUrl ); */
+    console.log(authors);
     return (
       <div className='create-user'>
         <h1>Create book</h1>
@@ -94,7 +101,7 @@ class createBook extends Component {
           <input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
           <input type="text" name='authors' onChange={this.handleChange} value={authors.map((i) => i.name)} className='email' placeholder='authors' />
           <div className='div-form'>
-            <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
+            <button type="button" /* disabled={buttonIsDisabled} */ onClick={this.handleSubmit} className='submit'>Salvar</button>
             <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
           </div>
         </form>

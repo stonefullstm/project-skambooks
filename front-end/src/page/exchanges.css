@@ -16,6 +16,7 @@
 .img1 {
   width: 120px;
   height: 150px;
+  box-shadow: 10px 5px 5px black;
 }
 .mais {
   width: 50px;
@@ -52,5 +53,11 @@
   display: flex;
   flex-wrap: wrap;
   margin-right: 10%;
+}
+
+.coverbook {
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
