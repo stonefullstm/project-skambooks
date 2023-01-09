@@ -9,12 +9,14 @@ import troca from '../images/troca.png';
 import excluir from '../images/excluir.png';
 import editar from '../images/editar.png';
 import mais from '../images/mais.png';
+/* import coverbook from '../images/coverbook.jpg'; */
 
 class skambooks extends Component {
   state = {
     reader: {},
     disabled: false,
     nome: '',
+    id: '',
   };
 
 
@@ -65,7 +67,7 @@ class skambooks extends Component {
     }
   };
 
-  handleReader = async () => {
+  handleReader = async (ids) => {
     let r = window.confirm('Want to make the switch?');
     if (r) {
       const token = localStorage.getItem('token');
@@ -83,6 +85,7 @@ class skambooks extends Component {
       if (result) {
         this.setState({
           disabled: true,
+          id: ids,
         });
         dispatch(requiretReaders(readerSqt));
       }
@@ -133,10 +136,11 @@ class skambooks extends Component {
   };
 
   render() {
-    const { reader, disabled, nome } = this.state;
+    const { reader, disabled, nome, id } = this.state;
     const { book, readers } = this.props;
-    console.log(nome);
+    /* console.log('sd', book); */
     const list = book.map((item, index) => {
+      console.log('cover',item.id);
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
           <li className='li-exchange'>
@@ -147,8 +151,10 @@ class skambooks extends Component {
             <li>readers: <strong>{item.readers.name}</strong></li>
             <li>year: <strong>{item.year}</strong></li>
           </div>
-
-          {disabled ? <div>
+          <div>
+            <img src={item.coverUrl} className='img' alt='CoverUrl'/>
+          </div>
+          {disabled && item.id === id ? <div>
             <p><strong>Whats user?</strong></p>
             <select value={nome} onChange={this.handleSelect}>
               {readers.map((i) => <option value={i.name}>{i.name}</option>)}
@@ -159,7 +165,7 @@ class skambooks extends Component {
           <div className='div-button'>
             <button type='button' className='button-list' onClick={() => this.handleUpdate(item.id)}><img src={editar} alt='images' className='img' /></button>
             <button type='button' className='button-list' onClick={() => this.handleExcluir(item.id)}><img src={excluir} alt='images' className='img' /></button>
-            <button type='button' className='button-list' onClick={this.handleReader}><img src={troca} alt='images' className='img' /></button>
+            <button type='button' className='button-list' onClick={() => this.handleReader(item.id)}><img src={troca} alt='images' className='img' /></button>
           </div>
         </div>)
       }

@@ -15,11 +15,7 @@ class createBook extends Component {
     pages: '',
     buttonIsDisabled: true,
     authors: [],
-  };
-
-  async componentDidMount() {
-    const result = await getBookIsbn(9780593437810);
-    console.log(result);
+    coverUrl: '',
   };
 
   handleChange = (event) => {
@@ -29,19 +25,21 @@ class createBook extends Component {
     }, async () => {
       const { isbn, year } = this.state;
       const result = await getBookIsbn(isbn);
+      /* console.log(result[0].volumeInfo.imageLinks.thumbnail); */
       if (result !== undefined) {
         const isDisabled = isbn.length < MIN_ISBN || year.length < MIN_YEAR;
         let page = '';
         page = result[0].volumeInfo.publishedDate;
         let a = result[0].volumeInfo.authors;
         let author = [];
-        a.forEach((item) => author.push(item));
+        a.forEach((item) => author.push({name: item}));
         this.setState({
           buttonIsDisabled: isDisabled,
           title: result[0].volumeInfo.title,
           year: page.slice(0, 4),
           pages: result[0].volumeInfo.pageCount,
           authors: author,
+          coverUrl: result[0].volumeInfo.imageLinks.thumbnail,
         });
       }
 
@@ -50,6 +48,7 @@ class createBook extends Component {
 
   handleSubmit = async () => {
     const { isbn, title, year, pages, authors } = this.state;
+    console.log(authors);
     const token = localStorage.getItem('token');
     const { history, idReader } = this.props;
     const updated= {
@@ -80,8 +79,8 @@ class createBook extends Component {
 
   render() {
 
-    const { buttonIsDisabled, title, year, pages, isbn, authors } = this.state;
-    console.log(title, year, pages, isbn, authors );
+    const { buttonIsDisabled, title, year, pages, isbn, coverUrl } = this.state;
+    console.log(title, year, pages, isbn, coverUrl );
     return (
       <div className='create-user'>
         <h1>Create book</h1>
