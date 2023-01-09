@@ -23,13 +23,15 @@ class createBook extends Component {
     this.setState({
       [name]: value,
     }, async () => {
-      const { isbn, year } = this.state;
+      const { isbn } = this.state;
       const result = await getBookIsbn(isbn);
       /* console.log(result[0].volumeInfo.imageLinks.thumbnail); */
       if (result !== undefined) {
-        const isDisabled = isbn.length < MIN_ISBN || year.length < MIN_YEAR;
-        let page = '';
-        page = result[0].volumeInfo.publishedDate;
+        // let page = '';
+        const page = result[0].volumeInfo.publishedDate;
+        const isDisabled = isbn.length < MIN_ISBN || page.slice(0, 4).length < MIN_YEAR;
+        // let page = '';
+        // page = result[0].volumeInfo.publishedDate;
         let a = result[0].volumeInfo.authors;
         let author = [];
         a.forEach((item) => author.push({name: item}));
