@@ -44,10 +44,10 @@ Book.init({
     field: 'reader_id',
   },
   coverUrl: {
-    allowNull: false,
+    allowNull: true,
     type: STRING,
     field: 'cover_url',
-    defaultValue: '../images/troca.png',
+    defaultValue: 'coverbook',
   }
 }, 
 {
