@@ -39,7 +39,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(255),
         field: 'cover_url',
-        defaultValue: '../images/coverbook.jpg',
+        defaultValue: 'coverbook',
       }
     });
   },

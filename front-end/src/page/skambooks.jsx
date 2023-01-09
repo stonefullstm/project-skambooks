@@ -9,7 +9,7 @@ import troca from '../images/troca.png';
 import excluir from '../images/excluir.png';
 import editar from '../images/editar.png';
 import mais from '../images/mais.png';
-/* import coverbook from '../images/coverbook.jpg'; */
+import coverbook from '../images/coverbook.jpg';
 
 class skambooks extends Component {
   state = {
@@ -140,7 +140,7 @@ class skambooks extends Component {
     const { book, readers } = this.props;
     /* console.log('sd', book); */
     const list = book.map((item, index) => {
-      console.log('cover',item.id);
+      console.log('cover',item.coverUrl);
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
           <li className='li-exchange'>
@@ -152,7 +152,7 @@ class skambooks extends Component {
             <li>year: <strong>{item.year}</strong></li>
           </div>
           <div>
-            <img src={item.coverUrl} className='img1' alt='CoverUrl'/>
+            { item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl'/> : <img src={coverbook} className='img1' alt='CoverUrl'/>}
           </div>
           {disabled && item.id === id ? <div>
             <p><strong>Whats user?</strong></p>

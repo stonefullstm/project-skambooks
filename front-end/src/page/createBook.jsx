@@ -80,8 +80,8 @@ class createBook extends Component {
 
   render() {
 
-    const { buttonIsDisabled, title, year, pages, isbn, coverUrl } = this.state;
-    console.log(title, year, pages, isbn, coverUrl );
+    const { buttonIsDisabled, title, year, pages, authors } = this.state;
+    /* console.log(title, year, pages, isbn, coverUrl ); */
     return (
       <div className='create-user'>
         <h1>Create book</h1>
@@ -90,6 +90,7 @@ class createBook extends Component {
           <input type="text" name='title' onChange={this.handleChange} value={title} className='email' placeholder='title' />
           <input type="text" name='year' onChange={this.handleChange} value={year} className='email' placeholder='year' />
           <input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
+          <input type="text" name='authors' onChange={this.handleChange} value={authors.map((i) => i.name)} className='email' placeholder='authors' />
           <div className='div-form'>
             <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
             <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
