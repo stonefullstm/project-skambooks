@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
-import { requiretBooks, requiretReaders, updateBook, idReader } from '../actions/action';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllBooks, getReaderById, deleteBook, getReaders, createExchanges } from '../services/fetchs';
-import '../App.css';
-import './exchanges.css';
 import { Link } from "react-router-dom";
-import troca from '../images/troca.png';
-import excluir from '../images/excluir.png';
-import editar from '../images/editar.png';
-import mais from '../images/mais.png';
-import coverbook from '../images/coverbook.jpg';
+import { idReader, requiretBooks, requiretReaders, updateBook } from '../actions/action';
+import '../App.css';
 import biblioteca from '../images/biblioteca.png';
+import coverbook from '../images/coverbook.jpg';
+import editar from '../images/editar.png';
+import excluir from '../images/excluir.png';
+import mais from '../images/mais.png';
+import troca from '../images/troca.png';
+import { createExchanges, deleteBook, getAllBooks, getReaderById, getReaders } from '../services/fetchs';
+import './exchanges.css';
 
 class skambooks extends Component {
   state = {
@@ -25,6 +25,7 @@ class skambooks extends Component {
     const token = localStorage.getItem('token');
     const options = {
       method: 'GET',
+      mode: 'no-cors',
       headers: {
         'Content-type': 'application/json',
         'Authorization': `${token}`,
