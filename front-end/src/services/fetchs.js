@@ -27,7 +27,8 @@ export const createReader = async (options) => {
 };
 
 export const getAllBooks = async (options) => {
-  const response = await fetch(url2, options);
+  const url = `${PROTOCOL}://${HOST}/books`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
