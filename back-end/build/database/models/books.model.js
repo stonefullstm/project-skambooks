@@ -39,10 +39,10 @@ Book.init({
         field: 'reader_id',
     },
     coverUrl: {
-        allowNull: false,
+        allowNull: true,
         type: sequelize_1.STRING,
         field: 'cover_url',
-        defaultValue: '../images/troca.png',
+        defaultValue: 'coverbook',
     }
 }, {
     // ... Outras configs
