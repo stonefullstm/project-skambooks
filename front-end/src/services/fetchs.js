@@ -6,8 +6,8 @@ const url2 = 'https://project-skambooks-production.up.railway.app/books';
 const url3 = 'http://localhost:3000/exchanges';
 const url4 = 'http://localhost:3000/readers/names';
 
-const HOST = process.env.REACT_APP_API_HOST || "localhost:3000";
-const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
+// const HOST = process.env.REACT_APP_API_HOST || "localhost:3000";
+// const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
 
 export const login = async (options) => {
   // const url = `${PROTOCOL}://${HOST}/login`;
