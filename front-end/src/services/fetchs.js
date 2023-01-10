@@ -1,6 +1,8 @@
 // const url = 'http://localhost:3000/login';
+const url = 'https://project-skambooks-production.up.railway.app/login';
 const url1 = 'http://localhost:3000/readers';
-const url2 = 'http://localhost:3000/books';
+// const url2 = 'http://localhost:3000/books';
+const url2 = 'https://project-skambooks-production.up.railway.app/books';
 const url3 = 'http://localhost:3000/exchanges';
 const url4 = 'http://localhost:3000/readers/names';
 
@@ -8,7 +10,7 @@ const HOST = process.env.REACT_APP_API_HOST || "localhost:3000";
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
 
 export const login = async (options) => {
-  const url = `${PROTOCOL}://${HOST}/login`;
+  // const url = `${PROTOCOL}://${HOST}/login`;
   const response = await fetch(url, options);
   const result = await response.json();
   return result;
@@ -27,8 +29,8 @@ export const createReader = async (options) => {
 };
 
 export const getAllBooks = async (options) => {
-  const url = `${PROTOCOL}://${HOST}/books`;
-  const response = await fetch(url, options);
+  // const url = `${PROTOCOL}://${HOST}/books`;
+  const response = await fetch(url2, options);
   const result = await response.json();
   return result;
 };
