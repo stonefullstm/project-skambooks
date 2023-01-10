@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import '../App.css';
 import { getReaderById } from '../services/fetchs';
 import './exchanges.css';
+import coverbook from '../images/coverbook.jpg';
+import biblioteca from '../images/biblioteca.png';
 
 class searcheBooks extends Component {
   state = {
@@ -42,6 +44,9 @@ class searcheBooks extends Component {
     if (filter === 'All') {
       const result = book.filter((item) => item.readers.id !== reader.id);
       list = result.map((item, index) => (<div key={index} className='list'>
+        <div className='coverbook'>
+          {item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl' /> : <img src={coverbook} className='img1' alt='CoverUrl' />}
+        </div>
         <li className='li-filter'>
           <li>book: <strong>{item.title}</strong></li>
           <li>year: <strong>{item.year}</strong></li>
@@ -57,6 +62,9 @@ class searcheBooks extends Component {
       list = result1.map((item, index) => {
         if (result1.length > 0) {
           return (<div key={index} className='list'>
+            <div className='coverbook'>
+              {item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl' /> : <img src={coverbook} className='img1' alt='CoverUrl' />}
+            </div>
             <li className='li-filter'>
               <li>book: <strong>{item.title}</strong></li>
               <li>year: <strong>{item.year}</strong></li>
@@ -75,21 +83,25 @@ class searcheBooks extends Component {
         .authors.some((author) => author.name.includes(change)));
       list = result2.map((item, index) => {
         if (result2.length > 0) {
-           return ( <div key={ index } className='list'>
+          return (<div key={index} className='list'>
+            <div className='coverbook'>
+              {item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl' /> : <img src={coverbook} className='img1' alt='CoverUrl' />}
+            </div>
             <li className='li-filter'>
               <li>book: <strong>{item.title}</strong></li>
               <li>year: <strong>{item.year}</strong></li>
               {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
               <li>readers: <strong>{item.readers.name}</strong></li>
             </li>
-           </div>)
-         }
+          </div>)
+        }
         return null;
       });
     };
     return (
       <div>
-        <h1>SKAMBOOKS</h1>
+        <img src={biblioteca} className='img11' alt='CoverUrl'/> 
+        <h1 className='skan'>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2><Link to='/exchange' className='Link'>My exchanges</Link></h2><h2 className='search'>Search books</h2></header>
         <h1>Search books</h1>
         <div onChange={this.handleChange} className='filtered'>

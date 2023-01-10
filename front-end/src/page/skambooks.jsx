@@ -10,6 +10,7 @@ import excluir from '../images/excluir.png';
 import editar from '../images/editar.png';
 import mais from '../images/mais.png';
 import coverbook from '../images/coverbook.jpg';
+import biblioteca from '../images/biblioteca.png';
 
 class skambooks extends Component {
   state = {
@@ -173,7 +174,8 @@ class skambooks extends Component {
     });
     return (
       <div>
-        <h1>SKAMBOOKS</h1>
+        <img src={biblioteca} className='img11' alt='CoverUrl'/> 
+        <h1 className='skan'>SKAMBOOKS</h1>
         <header className='header'>
           <h2 className='book'>My books</h2>
           <h2><Link to='/exchange' className='Link'>My exchanges</Link></h2>
