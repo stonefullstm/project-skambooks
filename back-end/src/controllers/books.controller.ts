@@ -4,7 +4,8 @@ import exchangesService from '../services/exchanges.service';
 import statusCodes from '../statusCodes';
 
 const getAllBooks = async (req: Request, res: Response) => {
-  const books = await booksService.getAllBooks();
+  // const books = await booksService.getAllBooks();
+  const books = { resposta: 'OK' };
   res.status(statusCodes.OK).json(books);
 };
 
