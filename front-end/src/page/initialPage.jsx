@@ -35,6 +35,7 @@ class initialPage extends Component {
 
     const options = {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-type': 'application/json',
       },
