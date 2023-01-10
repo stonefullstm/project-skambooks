@@ -33,7 +33,6 @@ const getAllExchangesByBook = async (id: number): Promise<TExchange[]> => {
 
 const getExchangeById = async (id: number): Promise<TExchange> => {
   const exchange = await exchangesModel.findByPk(id, {
-    // include: { model: authorsModel, as: 'authors', through: {attributes: []} }
   });
   return exchange as unknown as TExchange;
 };
