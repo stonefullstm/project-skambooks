@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { getExchanges, deleteExchanges, getReaderById, confirmeExchanges } from '../services/fetchs';
 import confirme from '../images/confirme.png';
 import excluir from '../images/excluir.png';
+import coverbook from '../images/coverbook.jpg';
+import biblioteca from '../images/biblioteca.png';
 
 export default class exchanges extends Component {
   state = {
@@ -66,6 +68,7 @@ export default class exchanges extends Component {
 
   render() {
     const { exchange, reader } = this.state;
+    console.log(exchange, 'ex');
     const list = exchange.map((item, index) => {
       let isDisabled = false;
       if (item.sender.id === reader.id && item.receiveDate === null) {
@@ -77,6 +80,9 @@ export default class exchanges extends Component {
       };
       if (exchange.length > 0) {
         return (<div key={index} className='lists'>
+          <div className='coverbook'>
+            {item.bookExchanged.coverUrl !== 'coverbook' ? <img src={item.bookExchanged.coverUrl} className='img1' alt='CoverUrl' /> : <img src={coverbook} className='img1' alt='CoverUrl' />}
+          </div>
           <li className='li-exchange'>
             <li>book: <strong>{item.bookExchanged.title}</strong></li>
             <li>sender: <strong>{item.sender.name}</strong></li>
@@ -96,7 +102,9 @@ export default class exchanges extends Component {
     });
 
     return (
-      <div><h1>SKAMBOOKS</h1>
+      <div>
+        <img src={biblioteca} className='img11' alt='CoverUrl' />
+        <h1 className='skan'>SKAMBOOKS</h1>
         <header className='header'><h2 className='book'><Link to='/skambooks' className='Link'>My books</Link></h2><h2>My exchanges</h2><h2 className='search'><Link to='/search' className='Link'>Search books</Link></h2></header>
         <h1>My exchanges</h1>
         <ol>
