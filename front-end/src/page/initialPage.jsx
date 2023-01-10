@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import '../App.css';
 import { login } from '../services/fetchs';
-import { Link } from "react-router-dom";
 /* import { connect } from 'react-redux'; */
 
 const MIN_LENGTH_INPUT = 8;
@@ -39,6 +39,7 @@ class initialPage extends Component {
         'Content-type': 'application/json',
       },
       body: JSON.stringify(update),
+      mode: 'cors',
     };
     const { message, token } = await login(options);
     if (message) {
