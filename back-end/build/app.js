@@ -8,7 +8,6 @@ const books_routes_1 = __importDefault(require("./routes/books.routes"));
 const exchanges_routes_1 = __importDefault(require("./routes/exchanges.routes"));
 const readers_routes_1 = __importDefault(require("./routes/readers.routes"));
 const app = (0, express_1.default)();
-// app.use(cors());
 app.use(express_1.default.json());
 app.use(books_routes_1.default);
 app.use(readers_routes_1.default);
