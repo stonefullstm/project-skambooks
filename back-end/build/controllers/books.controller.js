@@ -16,8 +16,8 @@ const books_service_1 = __importDefault(require("../services/books.service"));
 const exchanges_service_1 = __importDefault(require("../services/exchanges.service"));
 const statusCodes_1 = __importDefault(require("../statusCodes"));
 const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // const books = await booksService.getAllBooks();
-    const books = { resposta: 'OK' };
+    const books = yield books_service_1.default.getAllBooks();
+    // const books = { resposta: 'OK' };
     res.status(statusCodes_1.default.OK).json(books);
 });
 const getBookById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
