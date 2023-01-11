@@ -13,6 +13,7 @@ const readerSchema = Joi.object(
     name: Joi.string().required(),
     address: Joi.string().required(),
     number: Joi.number(),
+    complement: Joi.any().optional(),
     zipCode: Joi.string().length(8),
     district: Joi.string().required(),
     city: Joi.string().required(),
