@@ -53,9 +53,7 @@ const getAllExchangesByBook = (id) => __awaiter(void 0, void 0, void 0, function
     return exchanges;
 });
 const getExchangeById = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const exchange = yield exchanges_model_1.default.findByPk(id, {
-    // include: { model: authorsModel, as: 'authors', through: {attributes: []} }
-    });
+    const exchange = yield exchanges_model_1.default.findByPk(id, {});
     return exchange;
 });
 const createExchange = (exchange) => __awaiter(void 0, void 0, void 0, function* () {
