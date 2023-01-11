@@ -25,7 +25,6 @@ class skambooks extends Component {
     const token = localStorage.getItem('token');
     const options = {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Content-type': 'application/json',
         'Authorization': `${token}`,
