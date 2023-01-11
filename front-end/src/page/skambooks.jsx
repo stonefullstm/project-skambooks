@@ -28,7 +28,7 @@ class skambooks extends Component {
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
-        'Authorization': `Basic ${token}`,
+        'Authorization': `${token}`,
       },
     };
     const { dispatch, history } = this.props;
@@ -54,7 +54,7 @@ class skambooks extends Component {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json',
-          'Authorization': `Basic ${token}`,
+          'Authorization': `${token}`,
         },
       };
 
@@ -79,7 +79,7 @@ class skambooks extends Component {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `${token}`,
         },
       };
       const { dispatch } = this.props;
@@ -117,7 +117,7 @@ class skambooks extends Component {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `${token}`,
         },
         body: JSON.stringify(update),
       };
