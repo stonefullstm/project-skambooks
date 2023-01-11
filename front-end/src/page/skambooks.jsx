@@ -28,7 +28,7 @@ class skambooks extends Component {
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Basic ${token}`,
       },
     };
     const { dispatch, history } = this.props;
@@ -54,7 +54,7 @@ class skambooks extends Component {
         headers: {
           'Accept': 'application/json',
           'Content-type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Basic ${token}`,
         },
       };
 
