@@ -71,6 +71,7 @@ export default class createUser extends Component {
       body: JSON.stringify(update),
     };
     const result = await createReader(options);
+    console.log(result);
     if (result) {
       alert('Usuário criado com sucesso!');
     };
