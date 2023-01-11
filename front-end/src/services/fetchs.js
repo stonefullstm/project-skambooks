@@ -37,7 +37,8 @@ export const getAllBooks = async (options) => {
 };
 
 export const getReaderById = async (options) => {
-  const response = await fetch(url1, options);
+  const url = `${PROTOCOL}://${HOST}/readers`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
