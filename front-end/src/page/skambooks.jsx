@@ -26,6 +26,7 @@ class skambooks extends Component {
     const options = {
       method: 'GET',
       headers: {
+        'Accept': 'application/json',
         'Content-type': 'application/json',
         'Authorization': `${token}`,
       },
@@ -52,6 +53,7 @@ class skambooks extends Component {
       const options = {
         method: 'DELETE',
         headers: {
+          'Accept': 'application/json',
           'Content-type': 'application/json',
           'Authorization': `${token}`,
         },
@@ -76,6 +78,7 @@ class skambooks extends Component {
       const options = {
         method: 'GET',
         headers: {
+          'Accept': 'application/json',
           'Content-type': 'application/json',
           'Authorization': `${token}`,
         },
@@ -113,6 +116,7 @@ class skambooks extends Component {
       const options = {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-type': 'application/json',
           'Authorization': `${token}`,
         },
