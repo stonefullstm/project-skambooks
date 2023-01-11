@@ -1,9 +1,9 @@
 # Project Skambooks
-Uma aplicação full stack para troca de livros entre leitores. 
+Uma aplicação full stack para troca de livros entre leitores. Leitores se cadastram na aplicação e adicionam seus livros disponíveis para troca. A cada livro trocado, a pessoa leitora que envia o livro ganha um crédito, o que dá direito a receber outro livro. 
  
 ## Instalação/Execução 
  
-Será definido futuramente
+Aplicação pode ser executada em https://skambooks-production.up.railway.app/
 
 ## Funcionalidades 
  
