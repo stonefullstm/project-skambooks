@@ -35,6 +35,7 @@ class skambooks extends Component {
     if (books.message) {
       history.push('/');
     }
+    console.log(options);
     const reader = await getReaderById(options);
     this.setState({
       reader: reader,
@@ -141,7 +142,7 @@ class skambooks extends Component {
     const { book, readers } = this.props;
     /* console.log('sd', book); */
     const list = book.map((item, index) => {
-      console.log('cover',item.coverUrl);
+      // console.log('cover',item.coverUrl);
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
           <div className='coverbook'>
