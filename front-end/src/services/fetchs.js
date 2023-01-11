@@ -1,10 +1,10 @@
 // const url = 'http://localhost:3000/login';
 // const url = 'https://project-skambooks-production.up.railway.app/login';
-const url1 = 'http://localhost:3000/readers';
-const url2 = 'http://localhost:3000/books';
+// const url1 = 'http://localhost:3000/readers';
+// const url2 = 'http://localhost:3000/books';
 // const url2 = 'https://project-skambooks-production.up.railway.app/books';
-const url3 = 'http://localhost:3000/exchanges';
-const url4 = 'http://localhost:3000/readers/names';
+// const url3 = 'http://localhost:3000/exchanges';
+// const url4 = 'http://localhost:3000/readers/names';
 
 const HOST = process.env.REACT_APP_API_HOST || "localhost:3000";
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
@@ -24,7 +24,8 @@ export const myCep = async (cep) => {
 };
 
 export const createReader = async (options) => {
-  const response = await fetch(url1, options);
+  const url = `${PROTOCOL}://${HOST}/readers`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
@@ -44,49 +45,57 @@ export const getReaderById = async (options) => {
 };
 
 export const getBookById = async (id, options) => {
-  const response = await fetch(`http://localhost:3000/books/${id}`, options);
+  const url = `${PROTOCOL}://${HOST}/books/${id}`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 }
 
 export const getExchanges = async (options) => {
-  const response = await fetch(url3, options);
+  const url = `${PROTOCOL}://${HOST}/exchanges`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const deleteExchanges = async (id, options) => {
-  const response = await fetch(`http://localhost:3000/exchanges/${id}`, options);
+  const url = `${PROTOCOL}://${HOST}/exchanges${id}`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const confirmeExchanges = async (id, options) => {
-  const response = await fetch(`http://localhost:3000/exchanges/${id}`, options);
+  const url = `${PROTOCOL}://${HOST}/exchanges${id}`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const deleteBook = async (id, options) => {
-  const response = await fetch(`http://localhost:3000/books/${id}`, options);
+  const url = `${PROTOCOL}://${HOST}/books/${id}`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const getReaders = async (options) => {
-  const response = await fetch(url4, options);
+  const url = `${PROTOCOL}://${HOST}/readers/names`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const createExchanges = async (options) => {
-  const response = await fetch(url3, options);
+  const url = `${PROTOCOL}://${HOST}/exchanges`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
 
 export const updateBooks = async (id, options) => {
-  const response = await fetch(`http://localhost:3000/books/${id}`, options);
+  const url = `${PROTOCOL}://${HOST}/books/${id}`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
@@ -98,7 +107,8 @@ export const getBookIsbn = async (isbn) => {
 };
 
 export const createBooks = async (options) => {
-  const response = await fetch(url2, options);
+  const url = `${PROTOCOL}://${HOST}/books`;
+  const response = await fetch(url, options);
   const result = await response.json();
   return result;
 };
