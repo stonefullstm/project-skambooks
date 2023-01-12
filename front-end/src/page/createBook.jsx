@@ -98,7 +98,7 @@ class createBook extends Component {
     // const { message } = await createBooks(options);
     const { message } = await myFetch(options, 'books');
     alert(message);
-    history.push('/skambooks');
+    history.push('/');
   };
 
   handleCancel = () => {
