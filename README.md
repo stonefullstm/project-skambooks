@@ -36,5 +36,5 @@ Aplicação pode ser executada em https://skambooks-production.up.railway.app/
 
 ## Pessoas desenvolvedoras
 
-| [<img src="https://avatars.githubusercontent.com/u/6804615?v=4" width=115><br><sub>Carlos Araújo</sub>](https://github.com/stonefullstm) |  [<img src="https://avatars.githubusercontent.com/u/17199815?v=4" width=115><br><sub>Reinaldo Pereira dos Santos</sub>](https://github.com/reinaldoper) |
+| [<img src="https://avatars.githubusercontent.com/u/6804615?v=4" width=115><br><sub>Carlos Araújo</sub>](https://github.com/stonefullstm) |  [<img src="https://avatars.githubusercontent.com/u/17199815?v=4" width=115><br><sub>Reinaldo Santos</sub>](https://github.com/reinaldoper) |
 | :---: | :---: |
