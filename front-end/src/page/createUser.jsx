@@ -77,7 +77,7 @@ export default class createUser extends Component {
       alert('Usuário criado com sucesso!');
     };
     const { history } = this.props;
-    history.push('/skambooks');
+    history.push('/');
   };
   render() {
     const { buttonIsDisabled, address, district, city, state } = this.state;
