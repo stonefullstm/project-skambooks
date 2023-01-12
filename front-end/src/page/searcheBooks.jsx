@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import '../App.css';
-import { getReaderById } from '../services/fetchs';
-import './exchanges.css';
-import coverbook from '../images/coverbook.jpg';
 import biblioteca from '../images/biblioteca.png';
+import coverbook from '../images/coverbook.jpg';
+import { myFetch } from '../services/fetchs';
+import './exchanges.css';
 
 class searcheBooks extends Component {
   state = {
@@ -22,7 +22,8 @@ class searcheBooks extends Component {
         'Authorization': `${token}`,
       },
     };
-    const reader = await getReaderById(options);
+    // const reader = await getReaderById(options);
+    const reader = await myFetch(options, 'readers');
     this.setState({
       reader: reader,
     });

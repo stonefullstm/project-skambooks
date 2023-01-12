@@ -9,7 +9,7 @@ import editar from '../images/editar.png';
 import excluir from '../images/excluir.png';
 import mais from '../images/mais.png';
 import troca from '../images/troca.png';
-import { createExchanges, deleteBook, getAllBooks, getReaderById, getReaders } from '../services/fetchs';
+import { myFetch } from '../services/fetchs';
 import './exchanges.css';
 
 class skambooks extends Component {
@@ -32,11 +32,13 @@ class skambooks extends Component {
       },
     };
     const { dispatch, history } = this.props;
-    const books = await getAllBooks(options);
+    // const books = await getAllBooks(options);
+    const books = await myFetch(options, 'books');
     if (books.message) {
       history.push('/');
     }
-    const reader = await getReaderById(options);
+    // const reader = await getReaderById(options);
+    const reader = await myFetch(options, 'readers')
     this.setState({
       reader: reader,
     });
@@ -58,7 +60,8 @@ class skambooks extends Component {
         },
       };
 
-      const { message } = await deleteBook(id, options);
+      // const { message } = await deleteBook(id, options);
+      const { message } = await myFetch(options, `books/${id}`);
       if (message === `Books deleted: ${id}`) {
         const { book, dispatch } = this.props;
         const result = book.filter((item) => item.id !== id);
@@ -84,7 +87,8 @@ class skambooks extends Component {
       };
       const { dispatch } = this.props;
       const { reader } = this.state;
-      const result = await getReaders(options);
+      // const result = await getReaders(options);
+      const result = await myFetch(options, 'readers/names');
       const readerSqt = result.filter((item) => item.id !== reader.id);
       if (result) {
         this.setState({
@@ -121,7 +125,8 @@ class skambooks extends Component {
         },
         body: JSON.stringify(update),
       };
-      const { message } = await createExchanges(options);
+      // const { message } = await createExchanges(options);
+      const { message } = await myFetch(options, 'exchanges');
       alert(message);
       this.setState({
         disabled: false,
@@ -143,18 +148,16 @@ class skambooks extends Component {
   render() {
     const { reader, disabled, nome, id } = this.state;
     const { book, readers } = this.props;
-    /* console.log('sd', book); */
     const list = book.map((item, index) => {
-      // console.log('cover',item.coverUrl);
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
           <div className='coverbook'>
             { item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl'/> : <img src={coverbook} className='img1' alt='CoverUrl'/>}
           </div>
-          <li className='li-exchange'>
+          <div className='li-exchange'>
             <li>book: <strong>{item.title}</strong></li>
             {item.authors.map((i) => (<li>author: <strong>{i.name}</strong></li>))}
-          </li>
+          </div>
           <div>
             <li>readers: <strong>{item.readers.name}</strong></li>
             <li>year: <strong>{item.year}</strong></li>

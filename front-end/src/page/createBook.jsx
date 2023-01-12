@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import { createBooks, getBookIsbn } from '../services/fetchs';
+import { getBookIsbn, myFetch } from '../services/fetchs';
 import './exchanges.css';
 
 const MIN_ISBN = 13;
@@ -95,7 +95,8 @@ class createBook extends Component {
       },
       body: JSON.stringify(updated),
     };
-    const { message } = await createBooks(options);
+    // const { message } = await createBooks(options);
+    const { message } = await myFetch(options, 'books');
     alert(message);
     history.push('/skambooks');
   };
