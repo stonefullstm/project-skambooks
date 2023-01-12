@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import '../App.css';
-import { login } from '../services/fetchs';
-/* import { connect } from 'react-redux'; */
+import { myFetch } from '../services/fetchs';
 
 const MIN_LENGTH_INPUT = 8;
 class initialPage extends Component {
@@ -35,14 +34,13 @@ class initialPage extends Component {
 
     const options = {
       method: 'POST',
-      // mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
       },
       body: JSON.stringify(update),
     };
-    const { message, token } = await login(options);
+    const { message, token } = await myFetch(options, 'login');
     if (message) {
       alert(message);
     } if (token) {

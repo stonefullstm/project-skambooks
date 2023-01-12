@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { createReader, myCep } from '../services/fetchs';
+import { myCep, myFetch } from '../services/fetchs';
 
 const MIN_LENGTH_INPUT = 8;
 export default class createUser extends Component {
@@ -70,7 +70,8 @@ export default class createUser extends Component {
       },
       body: JSON.stringify(update),
     };
-    const result = await createReader(options);
+    // const result = await createReader(options);
+    const result = await myFetch(options, 'readers');
     console.log(result);
     if (result) {
       alert('Usuário criado com sucesso!');

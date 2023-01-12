@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import '../App.css';
-import './exchanges.css';
 import { Link } from "react-router-dom";
-import { getExchanges, deleteExchanges, getReaderById, confirmeExchanges } from '../services/fetchs';
-import confirme from '../images/confirme.png';
-import excluir from '../images/excluir.png';
-import coverbook from '../images/coverbook.jpg';
+import '../App.css';
 import biblioteca from '../images/biblioteca.png';
+import confirme from '../images/confirme.png';
+import coverbook from '../images/coverbook.jpg';
+import excluir from '../images/excluir.png';
+import { myFetch } from '../services/fetchs';
+import './exchanges.css';
 
 export default class exchanges extends Component {
   state = {
@@ -22,8 +22,10 @@ export default class exchanges extends Component {
         'Authorization': `${token}`,
       },
     };
-    const result = await getExchanges(options);
-    const reader = await getReaderById(options);
+    // const result = await getExchanges(options);
+    // const reader = await getReaderById(options);
+    const result = await myFetch(options, 'exchanges');
+    const reader = await myFetch(options, 'readers');
     this.setState({
       exchange: result,
       reader: reader,
@@ -41,7 +43,8 @@ export default class exchanges extends Component {
           'Authorization': `${token}`,
         },
       };
-      const { message } = await deleteExchanges(id, options);
+      // const { message } = await deleteExchanges(id, options);
+      const { message } = await myFetch(options, `exchanges/${id}`);
       alert(message);
       const { exchange } = this.state;
       this.setState({
@@ -61,14 +64,14 @@ export default class exchanges extends Component {
           'Authorization': `${token}`,
         },
       };
-      const { message } = await confirmeExchanges(id, options);
+      // const { message } = await confirmeExchanges(id, options);
+      const { message } = await myFetch(options, `exchanges/${id}`);
       alert(message);
     };
   };
 
   render() {
     const { exchange, reader } = this.state;
-    console.log(exchange, 'ex');
     const list = exchange.map((item, index) => {
       let isDisabled = false;
       if (item.sender.id === reader.id && item.receiveDate === null) {

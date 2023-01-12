@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
-import { getBookById, updateBooks } from '../services/fetchs';
+import { myFetch } from '../services/fetchs';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
@@ -15,7 +15,7 @@ class updateBook extends Component {
   }
 
   async componentDidMount() {
-    const { update } = this.props;
+    const { update: id } = this.props;
     const token = localStorage.getItem('token');
     const options = {
       method: 'GET',
@@ -24,8 +24,9 @@ class updateBook extends Component {
         'Authorization': `${token}`,
       },
     };
-    const book = await getBookById(update, options);
-    console.log(book.isbn);
+    // const book = await getBookById(update, options);
+    const book = await myFetch(options, `books/${id}`);
+    // console.log(book.isbn);
     this.setState({
       isbn: book.isbn,
       title: book.title,
@@ -41,7 +42,6 @@ class updateBook extends Component {
     }, () => {
       const { isbn, year } = this.state;
       const isDisabled = isbn.length < MIN_ISBN || year.length < MIN_YEAR;
-      console.log('is',isDisabled);
       this.setState({
         buttonIsDisabled: isDisabled,
       });
@@ -51,7 +51,7 @@ class updateBook extends Component {
   handleSubmit = async () => {
     const { isbn, title, year, pages } = this.state;
     const token = localStorage.getItem('token');
-    const { update, history } = this.props;
+    const { update: id, history } = this.props;
     const updated= {
       isbn: isbn,
       title: title,
@@ -66,7 +66,8 @@ class updateBook extends Component {
       },
       body: JSON.stringify(updated),
     };
-    const { message } = await updateBooks(update, options);
+    // const { message } = await updateBooks(update, options);
+    const { message } = await myFetch(options, `books/${id}`);
     alert(message);
     history.push('/skambooks');
   };
