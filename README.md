@@ -7,6 +7,7 @@ Uma aplicação full stack para troca de livros entre leitores. Leitores se cada
 <img src="https://img.shields.io/badge/STATUS-EM DESENVOLVIMENTO-blue"/>
 </p>
 
+
 ## Instalação/Execução 
  
 Aplicação pode ser executada em https://skambooks-production.up.railway.app/
@@ -36,3 +37,5 @@ Aplicação pode ser executada em https://skambooks-production.up.railway.app/
 ## Pessoas desenvolvedoras
 
 [<img src="https://avatars.githubusercontent.com/u/6804615?v=4" width=115><br><sub>Carlos Araújo</sub>](https://github.com/stonefullstm) |  [<img src="https://avatars.githubusercontent.com/u/17199815?v=4" width=115><br><sub>Reinaldo Pereira</sub>](https://github.com/reinaldoper) |
+
+
