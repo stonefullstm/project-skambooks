@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import '../App.css';
 import { myFetch } from '../services/fetchs';
+import { Button, Input } from 'reactstrap';
 
 const MIN_LENGTH_INPUT = 8;
 class initialPage extends Component {
@@ -55,19 +56,19 @@ class initialPage extends Component {
     return (
       <div className='login'>
         <h1 className='title'>User Login</h1>
-        <input type='text'
+        <Input type='text'
           placeholder='E-mail'
           name='email'
           onChange={this.handleChange}
           className='email' />
-        <input type='text'
+        <Input type='text'
           placeholder='password'
           name='password'
           onChange={this.handleChange}
           className='password' />
         <Link to='/create-user' className='link'>Create user</Link>
-        <button type='button'
-          className='button' disabled={buttonIsDisabled} onClick={this.handClick}>login</button>
+        <Button type='button'
+          className='button' disabled={buttonIsDisabled} onClick={this.handClick} color='success'>login</Button>
       </div>
     )
   }

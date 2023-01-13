@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import '../App.css';
 import { getBookIsbn, myFetch } from '../services/fetchs';
 import './exchanges.css';
+import { Button, Input } from 'reactstrap';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
@@ -115,15 +116,15 @@ class createBook extends Component {
       <div className='create-user'>
         <h1>Create book</h1>
         <form className='form'>
-          <input type="text" name='isbn' onChange={this.handleChange} className='email' placeholder='isbn' />
-          <input type="text" name='title' onChange={this.handleChange} value={title} className='email' placeholder='title' />
-          <input type="text" name='year' onChange={this.handleChange} value={year} className='email' placeholder='year' />
-          <input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
-          <input type="text" name='authors' onChange={this.handleChange} value={authors.map((i) => i.name)} className='email' placeholder='authors' />
-          <input type="text" name='coverUrl' onChange={this.handleChange} value={coverUrl} className='email' placeholder='cover URL' />
+          <Input type="text" name='isbn' onChange={this.handleChange} className='email' placeholder='isbn' />
+          <Input type="text" name='title' onChange={this.handleChange} value={title} className='email' placeholder='title' />
+          <Input type="text" name='year' onChange={this.handleChange} value={year} className='email' placeholder='year' />
+          <Input type="text" name='pages' onChange={this.handleChange} value={pages} className='email' placeholder='pages' />
+          <Input type="text" name='authors' onChange={this.handleChange} value={authors.map((i) => i.name)} className='email' placeholder='authors' />
+          <Input type="text" name='coverUrl' onChange={this.handleChange} value={coverUrl} className='email' placeholder='cover URL' />
           <div className='div-form'>
-            <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
-            <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
+            <Button type="button" disabled={buttonIsDisabled} color='success' onClick={this.handleSubmit} className='submit'>Salvar</Button>
+            <Button type="button" onClick={this.handleCancel} className='cancelar'color='warning'>Cancelar</Button>
           </div>
         </form>
       </div>
