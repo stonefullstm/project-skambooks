@@ -56,7 +56,7 @@ const createReader = async ( req: Request, res: Response) => {
   const result = await readersService.createReader(req.body);
   
   if (result) {
-    return res.status(statusCodes.CREATED).json(req.body);
+    return res.status(statusCodes.CREATED).json({ message: `Create reader: ${email}`});
   }
   return res.status(statusCodes.ERROR).json({ message: 'Error'});
 };
