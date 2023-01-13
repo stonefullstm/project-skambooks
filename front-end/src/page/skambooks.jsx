@@ -11,6 +11,7 @@ import mais from '../images/mais.png';
 import troca from '../images/troca.png';
 import { myFetch } from '../services/fetchs';
 import './exchanges.css';
+import { Button } from 'reactstrap';
 
 class skambooks extends Component {
   state = {
@@ -164,16 +165,16 @@ class skambooks extends Component {
           </div>
           {disabled && item.id === id ? <div>
             <p><strong>Whats user?</strong></p>
-            <select value={nome} onChange={this.handleSelect}>
+            <select value={nome} class="form-select form-select-lg mb-3" onChange={this.handleSelect}>
               {readers.map((i) => <option value={i.name}>{i.name}</option>)}
             </select>
-            <button type='button' onClick={() => this.handleSender(item.id)}> Trocar </button>
+            <Button type='button' color='warning' onClick={() => this.handleSender(item.id)}> Trocar </Button>
           </div> : null}
 
           <div className='div-button'>
-            <button type='button' className='button-list' onClick={() => this.handleUpdate(item.id)}><img src={editar} alt='images' className='img' /></button>
-            <button type='button' className='button-list' onClick={() => this.handleExcluir(item.id)}><img src={excluir} alt='images' className='img' /></button>
-            <button type='button' className='button-list' onClick={() => this.handleReader(item.id)}><img src={troca} alt='images' className='img' /></button>
+            <Button type='button' color='success' className='button-list' onClick={() => this.handleUpdate(item.id)}><img src={editar} alt='images' className='img' /></Button>
+            <Button type='button' color='danger' className='button-list' onClick={() => this.handleExcluir(item.id)}><img src={excluir} alt='images' className='img' /></Button>
+            <Button type='button' color='warning' className='button-list' onClick={() => this.handleReader(item.id)}><img src={troca} alt='images' className='img' /></Button>
           </div>
         </div>)
       }
@@ -190,8 +191,8 @@ class skambooks extends Component {
           <h2 className='logout'><Link to='/' className='Link'>Logout</Link></h2>
         </header>
         <h1>My books</h1>
-        <button type='button'
-          className='button-mais' onClick={ this.handleMais }><img src={mais} alt="Images" className='mais' /></button>
+        <Button type='button'
+          className='button-mais' color='primary' onClick={ this.handleMais }><img src={mais} alt="Images" className='mais' /></Button>
         <ol>
           {list}
         </ol>

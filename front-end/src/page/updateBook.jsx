@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../App.css';
 import { myFetch } from '../services/fetchs';
+import { Button, Input } from 'reactstrap';
 
 const MIN_ISBN = 13;
 const MIN_YEAR = 4;
@@ -84,13 +85,13 @@ class updateBook extends Component {
       <div className='create-user'>
         <h1>Update book</h1>
         <form className='form'>
-          <input type="text" name='isbn' value={isbn} onChange={this.handleChange} className='email' placeholder='isbn' />
-          <input type="text" name='title' value={title} onChange={this.handleChange} className='email' placeholder='title' />
-          <input type="text" name='year' value={year} onChange={this.handleChange} className='email' placeholder='year' />
-          <input type="text" name='pages' value={pages} onChange={this.handleChange} className='email' placeholder='pages' />
+          <Input type="text" name='isbn' value={isbn} onChange={this.handleChange} className='email' placeholder='isbn' />
+          <Input type="text" name='title' value={title} onChange={this.handleChange} className='email' placeholder='title' />
+          <Input type="text" name='year' value={year} onChange={this.handleChange} className='email' placeholder='year' />
+          <Input type="text" name='pages' value={pages} onChange={this.handleChange} className='email' placeholder='pages' />
           <div className='div-form'>
-            <button type="button" disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</button>
-            <button type="button" onClick={this.handleCancel} className='cancelar'>Cancelar</button>
+            <Button type="button" color='success' disabled={buttonIsDisabled} onClick={this.handleSubmit} className='submit'>Salvar</Button>
+            <Button type="button" color='warning' onClick={this.handleCancel} className='cancelar'>Cancelar</Button>
           </div>
         </form>
       </div>

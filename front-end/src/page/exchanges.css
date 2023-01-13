@@ -37,6 +37,7 @@
 
 .button-mais {
   border-radius: 10px;
+  margin-bottom: 5px;
   cursor: pointer;
   width: 90px;
   background-color: rgb(208, 201, 201);

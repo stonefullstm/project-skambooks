@@ -28,6 +28,17 @@ body {
   color: black;
   font-size: larger;
 }
+.email2 {
+  width: 150px;
+  height: 50px;
+  margin-bottom: 30px;
+  background-color: rgb(208, 201, 201);
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+  color: black;
+  font-size: larger;
+}
 
 .password {
   width: 250px;
@@ -65,7 +76,7 @@ body {
 .form {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 250px;
 }
 
 .create-user {
@@ -99,7 +110,7 @@ body {
   border: 0 none;
   outline: 0;
   font-size: larger;
-  margin-left: 100px;
+  margin-left: 70px;
 }
 
 .div-form {
@@ -152,6 +163,7 @@ li {
   border-radius: 10px;
   cursor: pointer;
   width: 90px;
+  height: 50px;
   background-color: rgb(208, 201, 201);
   box-shadow: 0 0 0 0;
   border: 0 none;
@@ -165,7 +177,7 @@ li {
 .filtered {
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 500px;
   margin: 0 auto;
   /* margin-left: 38%; */
  /*  border: 1px solid black; */
