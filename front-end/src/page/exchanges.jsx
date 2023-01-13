@@ -22,8 +22,6 @@ export default class exchanges extends Component {
         'Authorization': `${token}`,
       },
     };
-    // const result = await getExchanges(options);
-    // const reader = await getReaderById(options);
     const result = await myFetch(options, 'exchanges');
     const reader = await myFetch(options, 'readers');
     this.setState({

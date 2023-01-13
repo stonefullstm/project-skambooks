@@ -60,7 +60,6 @@ export default class createUser extends Component {
       phone: phone,
       email: email,
       password: password,
-      // credits: credits,
     };
 
     const options = {
@@ -70,14 +69,16 @@ export default class createUser extends Component {
       },
       body: JSON.stringify(update),
     };
-    // const result = await createReader(options);
-    const result = await myFetch(options, 'readers');
-    console.log(result);
-    if (result) {
-      alert('Usuário criado com sucesso!');
+    const { message } = await myFetch(options, 'readers');
+    if (message === `Create reader: ${email}`) {
+      alert(message);
+      const { history } = this.props;
+      history.push('/');
+    } else {
+      alert(message);
+      const { history } = this.props;
+      history.push('/');
     };
-    const { history } = this.props;
-    history.push('/');
   };
   render() {
     const { buttonIsDisabled, address, district, city, state } = this.state;
