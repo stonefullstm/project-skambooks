@@ -11,7 +11,7 @@ import mais from '../images/mais.png';
 import troca from '../images/troca.png';
 import { myFetch } from '../services/fetchs';
 import './exchanges.css';
-import { Button } from 'reactstrap';
+import {Button} from "reactstrap";
 
 class skambooks extends Component {
   state = {

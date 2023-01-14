@@ -127,10 +127,10 @@ body {
 }
 
 .book {
-  /* margin-left: 150px; */
+  margin-left: 50px;
 }
 .search {
-  /* margin-right: 650px; */
+  margin-right: 50px;
 }
 
 .list {
@@ -172,6 +172,8 @@ li {
 }
 .Link {
   text-decoration:none;
+  /* margin-top: 10px;
+  margin-bottom: 10px; */
 }
 
 .filtered {
