@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
+import statusCodes from '../statusCodes';
 
 const loginSchema = Joi.object(
   {
@@ -48,26 +49,42 @@ const updateBookSchema = Joi.object(
 
 export const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginSchema.validate(req.body);
-  if (error) return res.status(400).json({ message: error.message });
+  if (error) return res.status(statusCodes.BAD_REQUEST).json({
+    status: statusCodes.BAD_REQUEST,
+    message: error.message,
+    data: {}
+   });
   next();
 };
 
 export const validateReader = (req: Request, res: Response, next: NextFunction) => {
   const { error } = readerSchema.validate(req.body);
-  if (error) return res.status(400).json({ message: error.message });
+  if (error) return res.status(statusCodes.BAD_REQUEST).json({ 
+    status: statusCodes.BAD_REQUEST,
+    message: error.message,
+    data: {}
+   });
   next();
 };
 
 export const validateBook = (req: Request, res: Response, next: NextFunction) => {
   const { isbn, title, year, pages, coverUrl, authors } = req.body;
   const { error } = bookSchema.validate({ isbn, title, year, pages, coverUrl, authors });
-  if (error) return res.status(400).json({ message: error.message });
+  if (error) return res.status(statusCodes.BAD_REQUEST).json({ 
+    status: statusCodes.BAD_REQUEST,
+    message: error.message,
+    data: {}
+ });
   next();
 };
 
 export const validateUpdateBook = (req: Request, res: Response, next: NextFunction) => {
   const { isbn, title, year, pages, coverUrl } = req.body;
   const { error } = updateBookSchema.validate({ isbn, title, year, pages, coverUrl });
-  if (error) return res.status(400).json({ message: error.message });
+  if (error) return res.status(statusCodes.BAD_REQUEST).json({ 
+    status: statusCodes.BAD_REQUEST,
+    message: error.message,
+    data: {}
+ });
   next();
 };

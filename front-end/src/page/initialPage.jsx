@@ -40,7 +40,10 @@ class initialPage extends Component {
       },
       body: JSON.stringify(update),
     };
-    const { message, token } = await myFetch(options, 'login');
+    const response = await myFetch(options, 'login');
+    const { status } = response;
+    const { message, token } = await response.json();
+    console.log(status, message, token);
     if (message) {
       alert(message);
     } if (token) {

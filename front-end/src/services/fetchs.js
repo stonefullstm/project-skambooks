@@ -5,8 +5,8 @@ const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
 export const myFetch = async (options, endpoint) => {
   const url = `${PROTOCOL}://${HOST}/${endpoint}`;
   const response = await fetch(url, options);
-  const result = await response.json();
-  return result;
+  // const result = await response.json();
+  return response;
 }
 
 export const myCep = async (cep) => {

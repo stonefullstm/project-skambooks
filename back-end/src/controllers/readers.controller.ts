@@ -13,7 +13,8 @@ const getReaderById = async ( req: Request, res: Response) => {
   if (result) {
     return res.status(statusCodes.OK).json(result);
   }
-  return res.status(statusCodes.NOT_FOUND).json({ message: 'Reader not found'});
+  return res.status(statusCodes.NOT_FOUND).json({ 
+    message: 'Reader not found'});
 };
 
 const getAllReaders = async (req: Request, res: Response) => {
@@ -29,10 +30,18 @@ const getReaderByEmail = async (req: Request, res: Response) => {
   const user = await readersService.getReaderByEmail(email);
   
   if (!user || !user.id) {
-    return res.status(statusCodes.NOT_FOUND).json({message: 'User not found'});
+    return res.status(statusCodes.NOT_FOUND).json({
+      status: statusCodes.NOT_FOUND,
+      message: 'User not found',
+      data: {}
+    });
   };
   if (!bcrypt.compareSync(password, user.password) ) {
-    return res.status(statusCodes.NOT_FOUND).json({message: 'Invalid password'});
+    return res.status(statusCodes.BAD_REQUEST).json({
+      status: statusCodes.BAD_REQUEST,
+      message: 'Invalid password',
+      data: {}
+    });
   }
   const userData = { 
     id: user.id,
@@ -44,7 +53,10 @@ const getReaderByEmail = async (req: Request, res: Response) => {
   };
   const token = jwt.sign( userData, secret as string, jwtConfig);
 
-  res.status(statusCodes.OK).json({ token });
+  res.status(statusCodes.OK).json({
+    status: statusCodes.OK,
+    message: 'OK',
+    data: {token} });
 };
 
 const createReader = async ( req: Request, res: Response) => {
