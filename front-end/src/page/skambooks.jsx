@@ -20,9 +20,6 @@ class skambooks extends Component {
     disabled: false,
     nome: '',
     id: '',
-    alert: false,
-    user: '',
-    alertSender: false,
   };
 
 
@@ -69,10 +66,7 @@ class skambooks extends Component {
         const r = requiretBooks(result);
         dispatch(r);
       }
-      this.setState({
-        alert: true,
-        user: message,
-      });
+      alert(message);
 
     }
   };
@@ -129,9 +123,9 @@ class skambooks extends Component {
         body: JSON.stringify(update),
       };
       const { message } = await myFetch(options, 'exchanges');
+      alert(message);
       this.setState({
-        alertSender: true,
-        user: message,
+        disabled: false,
       });
     }
   };
@@ -147,21 +141,8 @@ class skambooks extends Component {
     history.push('/create-book');
   };
 
-  closeBook = () => {
-    this.setState({
-      alert: false,
-    });
-  };
-
-  closeSender = () => {
-    this.setState({
-      alertSender: false,
-      disabled: false,
-    });
-  };
-
   render() {
-    const { reader, disabled, nome, id, alert, user, alertSender } = this.state;
+    const { reader, disabled, nome, id } = this.state;
     const { book, readers } = this.props;
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
@@ -205,12 +186,6 @@ class skambooks extends Component {
           <h2 className='logout'><Link to='/' className='Link'>Logout</Link></h2>
         </header>
         <h1>My books</h1>
-        {alert ? <div class='alert alert-success alert-dismisible'>{user}
-        <button class='close' data-dismiss='alert' onClick={this.closeBook}>&times;</button>
-        </div> : null}
-        {alertSender ? <div class='alert alert-success alert-dismisible'>{user}
-        <button class='close' data-dismiss='alert' onClick={this.closeSender}>&times;</button>
-        </div> : null}
         <Button type='button'
           className='button-mais' color='primary' onClick={this.handleMais}><img src={mais} alt="Images" className='mais' /></Button>
         <ol>
