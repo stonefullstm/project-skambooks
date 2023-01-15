@@ -19,6 +19,10 @@ export default class createUser extends Component {
     password: '',
     // credits: '',
     buttonIsDisabled: true,
+    alert: false,
+    alertCep: false,
+    alertError: false,
+    user: '',
   }
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +33,9 @@ export default class createUser extends Component {
       const { email, password, zipCode } = this.state;
       const result = await myCep(zipCode);
       if (result.erro) {
-        alert('CEP incorreto!');
+        this.setState({
+          alertCep: true,
+        })
       }
       const isDisabled = password.length < MIN_LENGTH_INPUT || !validEmail.test(email);
       this.setState({
@@ -72,20 +78,51 @@ export default class createUser extends Component {
     };
     const { message } = await myFetch(options, 'readers');
     if (message === `Create reader: ${email}`) {
-      alert(message);
-      const { history } = this.props;
-      history.push('/');
+      this.setState({
+        alert: true,
+        user: message,
+      });
     } else {
-      alert(message);
-      const { history } = this.props;
-      history.push('/');
+     this.setState({
+      alertError: true,
+      user: message,
+     });
     };
   };
+
+  closeCep = () => {
+    this.setState({
+      alertCep: false,
+    })
+  };
+
+  closeUser = () => {
+    this.setState({
+      alert: false,
+    });
+    const { history } = this.props;
+      history.push('/');
+  };
+
+  closeUserError = () => {
+    this.setState({
+      alertError: false,
+    });
+  };
   render() {
-    const { buttonIsDisabled, address, district, city, state } = this.state;
+    const { buttonIsDisabled, address, district, city, state, alertCep, alert, user, alertError } = this.state;
     return (
       <div className='create-user'>
         <h1>Create User</h1>
+        {alertCep ? <div class='alert alert-warning alert-dismisible'>Cep incorrect!
+        <button class='close' data-dismiss='alert' onClick={this.closeCep}>&times;</button>
+        </div> : null}
+        {alert ? <div class='alert alert-success alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeUser}>&times;</button>
+        </div> : null}
+        {alertError ? <div class='alert alert-danger alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeUserError}>&times;</button>
+        </div> : null}
         <form className='form'>
           <Input type="text" name='name' onChange={this.handleChange} className='email' placeholder='Name' />
           <Input type="text" name='zipCode' onChange={this.handleChange} className='email' placeholder='CEP' />

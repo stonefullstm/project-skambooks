@@ -13,6 +13,8 @@ class updateBook extends Component {
     year: '',
     pages: '',
     buttonIsDisabled: true,
+    alert: false,
+    user: '',
   }
 
   async componentDidMount() {
@@ -52,7 +54,7 @@ class updateBook extends Component {
   handleSubmit = async () => {
     const { isbn, title, year, pages } = this.state;
     const token = localStorage.getItem('token');
-    const { update: id, history } = this.props;
+    const { update: id } = this.props;
     const updated= {
       isbn: isbn,
       title: title,
@@ -67,10 +69,11 @@ class updateBook extends Component {
       },
       body: JSON.stringify(updated),
     };
-    // const { message } = await updateBooks(update, options);
     const { message } = await myFetch(options, `books/${id}`);
-    alert(message);
-    history.push('/skambooks');
+    this.setState({
+      alert: true,
+      user: message,
+    });
   };
 
 
@@ -79,11 +82,22 @@ class updateBook extends Component {
     history.push('/skambooks');
   };
 
+  closeBook = () => {
+    this.setState({
+      alert: false,
+    });
+    const { history } = this.props;
+    history.push('/skambooks');
+  };
+
   render() {
-    const { isbn, title, year, pages, buttonIsDisabled } = this.state;
+    const { isbn, title, year, pages, buttonIsDisabled, alert, user } = this.state;
     return (
       <div className='create-user'>
         <h1>Update book</h1>
+        {alert ? <div class='alert alert-success alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeBook}>&times;</button>
+        </div> : null}
         <form className='form'>
           <Input type="text" name='isbn' value={isbn} onChange={this.handleChange} className='email' placeholder='isbn' />
           <Input type="text" name='title' value={title} onChange={this.handleChange} className='email' placeholder='title' />
