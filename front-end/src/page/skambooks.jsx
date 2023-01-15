@@ -11,7 +11,8 @@ import mais from '../images/mais.png';
 import troca from '../images/troca.png';
 import { myFetch } from '../services/fetchs';
 import './exchanges.css';
-import {Button} from "reactstrap";
+import { Button } from "reactstrap";
+
 
 class skambooks extends Component {
   state = {
@@ -19,6 +20,9 @@ class skambooks extends Component {
     disabled: false,
     nome: '',
     id: '',
+    alert: false,
+    user: '',
+    alertSender: false,
   };
 
 
@@ -33,12 +37,10 @@ class skambooks extends Component {
       },
     };
     const { dispatch, history } = this.props;
-    // const books = await getAllBooks(options);
     const books = await myFetch(options, 'books');
     if (books.message) {
       history.push('/');
     }
-    // const reader = await getReaderById(options);
     const reader = await myFetch(options, 'readers')
     this.setState({
       reader: reader,
@@ -60,8 +62,6 @@ class skambooks extends Component {
           'Authorization': `${token}`,
         },
       };
-
-      // const { message } = await deleteBook(id, options);
       const { message } = await myFetch(options, `books/${id}`);
       if (message === `Books deleted: ${id}`) {
         const { book, dispatch } = this.props;
@@ -69,7 +69,10 @@ class skambooks extends Component {
         const r = requiretBooks(result);
         dispatch(r);
       }
-      alert(message);
+      this.setState({
+        alert: true,
+        user: message,
+      });
 
     }
   };
@@ -88,7 +91,6 @@ class skambooks extends Component {
       };
       const { dispatch } = this.props;
       const { reader } = this.state;
-      // const result = await getReaders(options);
       const result = await myFetch(options, 'readers/names');
       const readerSqt = result.filter((item) => item.id !== reader.id);
       if (result) {
@@ -126,12 +128,11 @@ class skambooks extends Component {
         },
         body: JSON.stringify(update),
       };
-      // const { message } = await createExchanges(options);
       const { message } = await myFetch(options, 'exchanges');
-      alert(message);
       this.setState({
-        disabled: false,
-      })
+        alertSender: true,
+        user: message,
+      });
     }
   };
 
@@ -146,14 +147,27 @@ class skambooks extends Component {
     history.push('/create-book');
   };
 
+  closeBook = () => {
+    this.setState({
+      alert: false,
+    });
+  };
+
+  closeSender = () => {
+    this.setState({
+      alertSender: false,
+      disabled: false,
+    });
+  };
+
   render() {
-    const { reader, disabled, nome, id } = this.state;
+    const { reader, disabled, nome, id, alert, user, alertSender } = this.state;
     const { book, readers } = this.props;
     const list = book.map((item, index) => {
       if (item.readers.id === reader.id) {
         return (<div key={index} className='list'>
           <div className='coverbook'>
-            { item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl'/> : <img src={coverbook} className='img1' alt='CoverUrl'/>}
+            {item.coverUrl !== 'coverbook' ? <img src={item.coverUrl} className='img1' alt='CoverUrl' /> : <img src={coverbook} className='img1' alt='CoverUrl' />}
           </div>
           <div className='li-exchange'>
             <li>book: <strong>{item.title}</strong></li>
@@ -182,7 +196,7 @@ class skambooks extends Component {
     });
     return (
       <div>
-        <img src={biblioteca} className='img11' alt='CoverUrl'/> 
+        <img src={biblioteca} className='img11' alt='CoverUrl' />
         <h1 className='skan'>SKAMBOOKS</h1>
         <header className='header'>
           <h2 className='book'>My books</h2>
@@ -191,8 +205,14 @@ class skambooks extends Component {
           <h2 className='logout'><Link to='/' className='Link'>Logout</Link></h2>
         </header>
         <h1>My books</h1>
+        {alert ? <div class='alert alert-success alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeBook}>&times;</button>
+        </div> : null}
+        {alertSender ? <div class='alert alert-success alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeSender}>&times;</button>
+        </div> : null}
         <Button type='button'
-          className='button-mais' color='primary' onClick={ this.handleMais }><img src={mais} alt="Images" className='mais' /></Button>
+          className='button-mais' color='primary' onClick={this.handleMais}><img src={mais} alt="Images" className='mais' /></Button>
         <ol>
           {list}
         </ol>

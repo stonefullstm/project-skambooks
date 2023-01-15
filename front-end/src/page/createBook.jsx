@@ -17,6 +17,8 @@ class createBook extends Component {
     buttonIsDisabled: true,
     authors: [],
     coverUrl: '',
+    alert: false,
+    user: '',
   };
 
   handleChange = (event) => {
@@ -77,7 +79,7 @@ class createBook extends Component {
     const { isbn, title, year, pages, authors, coverUrl } = this.state;
     console.log(authors);
     const token = localStorage.getItem('token');
-    const { history, idReader } = this.props;
+    const { idReader } = this.props;
     const updated= {
       isbn: isbn,
       title: title,
@@ -98,8 +100,10 @@ class createBook extends Component {
     };
     // const { message } = await createBooks(options);
     const { message } = await myFetch(options, 'books');
-    alert(message);
-    history.push('/skambooks');
+    this.setState({
+      alert: true,
+      user: message,
+    });
   };
 
   handleCancel = () => {
@@ -107,14 +111,24 @@ class createBook extends Component {
     history.push('/skambooks');
   };
 
+  closeBook = () => {
+    this.setState({
+      alert: false,
+    });
+    const { history } = this.props;
+    history.push('/skambooks');
+  };
+
   render() {
 
-    const { buttonIsDisabled, title, year, pages, coverUrl, authors } = this.state;
-    /* console.log(title, year, pages, isbn, coverUrl ); */
+    const { buttonIsDisabled, title, year, pages, coverUrl, authors, alert, user } = this.state;
     console.log(authors);
     return (
       <div className='create-user'>
         <h1>Create book</h1>
+        {alert ? <div class='alert alert-success alert-dismisible'>{user}
+        <button class='close' data-dismiss='alert' onClick={this.closeBook}>&times;</button>
+        </div> : null}
         <form className='form'>
           <Input type="text" name='isbn' onChange={this.handleChange} className='email' placeholder='isbn' />
           <Input type="text" name='title' onChange={this.handleChange} value={title} className='email' placeholder='title' />
